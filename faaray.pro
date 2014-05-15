@@ -11,12 +11,24 @@ TEMPLATE = lib
 
 DEFINES += FAARAY_LIBRARY
 
-SOURCES += faaray.cpp
+SOURCES += faaray.cpp \
+    renderjob.cpp
 
 HEADERS += faaray.h\
-        faaray_global.h
+        faaray_global.h \
+    renderjob.h
 
 unix {
-    target.path = /usr/lib
-    INSTALLS += target
+    target.path = $$PWD/../inst/lib
+    headers.path = $$PWD/../inst/include/faaray
+    headers.files = *.h
+    INSTALLS += target headers
 }
+
+win32 {
+    target.path = $$PWD/../inst/lib
+    headers.path = $$PWD/../inst/include/faaray
+    headers.files = *.h
+    INSTALLS += target headers
+}
+

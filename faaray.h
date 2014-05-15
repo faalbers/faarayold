@@ -1,13 +1,15 @@
-#ifndef FAARAY_H
-#define FAARAY_H
+#ifndef FAARAY_FAARAY_H
+#define FAARAY_FAARAY_H
 
 #include "faaray_global.h"
 
-class FAARAYSHARED_EXPORT Faaray
+namespace FaaRay {
+class FAARAYSHARED_EXPORT FaaRay
 {
 
 public:
-    Faaray();
+    FaaRay();
 };
+}
 
-#endif // FAARAY_H
+#endif // FAARAY_FAARAY_H
