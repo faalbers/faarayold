@@ -1,5 +1,8 @@
 #include "renderjob.h"
 
-FaaRay::RenderJob::RenderJob()
+FaaRay::RenderJob::RenderJob() :
+    viewPlaneSPtr_(new ViewPlane),
+    sceneSPtr_(new Scene),
+    multiThread_(false)
 {
 }

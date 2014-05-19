@@ -12,11 +12,17 @@ TEMPLATE = lib
 DEFINES += FAARAY_LIBRARY
 
 SOURCES += faaray.cpp \
-    renderjob.cpp
+    renderjob.cpp \
+    viewplane.cpp \
+    scene.cpp
 
 HEADERS += faaray.h\
         faaray_global.h \
-    renderjob.h
+    renderjob.h \
+    viewplane.h \
+    scene.h
+
+CONFIG += c++11
 
 unix {
     target.path = $$PWD/../inst/lib
@@ -32,3 +38,8 @@ win32 {
     INSTALLS += target headers
 }
 
+
+unix|win32: LIBS += -L$$PWD/../inst/lib/ -lgfa
+
+INCLUDEPATH += $$PWD/../inst/include
+DEPENDPATH += $$PWD/../inst/include

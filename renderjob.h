@@ -3,6 +3,8 @@
 #define FAARAY_RENDERJOB_H
 //==============================================================================
 #include "faaray_global.h"
+#include "viewplane.h"
+#include "scene.h"
 #include <memory>
 //==============================================================================
 namespace FaaRay {
@@ -12,8 +14,8 @@ public:
     RenderJob();
 
 private:
-    //std::shared_ptr<ViewPlane>  viewPlaneSPtr_;
-    //std::shared_ptr<Scene>      sceneSPtr_;
+    std::shared_ptr<ViewPlane>  viewPlaneSPtr_;
+    std::shared_ptr<Scene>      sceneSPtr_;
     bool                        multiThread_;
 };
 }
