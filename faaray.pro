@@ -22,7 +22,8 @@ HEADERS += faaray.h\
     viewplane.h \
     scene.h
 
-CONFIG += c++11
+unix: CONFIG += c++11
+win32: QMAKE_CXXFLAGS += -std=c++11
 
 unix {
     target.path = $$PWD/../inst/lib
