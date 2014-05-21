@@ -8,17 +8,26 @@
 #include <memory>
 //==============================================================================
 namespace FaaRay {
+
+class TraceThread;
+
 class FAARAYSHARED_EXPORT RenderJob
 {
 public:
     RenderJob();
 
     void setViewPlaneSPtr(std::shared_ptr<ViewPlane> viewPlaneSPtr);
+    void setMultiThread();
+    void render() const;
 
 private:
     std::shared_ptr<ViewPlane>  viewPlaneSPtr_;
     std::shared_ptr<Scene>      sceneSPtr_;
     bool                        multiThread_;
+
+    void renderOneThread_() const;
+    void renderMultiThread_() const;
+    void setupTraceThread_(TraceThread &rt) const;
 };
 }
 

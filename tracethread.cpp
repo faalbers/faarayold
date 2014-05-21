@@ -1,5 +1,5 @@
-#include "scene.h"
+#include "tracethread.h"
 //==============================================================================
-FaaRay::Scene::Scene()
+FaaRay::TraceThread::TraceThread()
 {
 }

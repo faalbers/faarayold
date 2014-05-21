@@ -1,14 +1,13 @@
-#ifndef FAARAY_SCENE_H
-#define FAARAY_SCENE_H
+#ifndef FAARAY_TRACETHREAD_H
+#define FAARAY_TRACETHREAD_H
 //==============================================================================
 #include "faaray_global.h"
 //==============================================================================
 namespace FaaRay {
-class FAARAYSHARED_EXPORT Scene
+class FAARAYSHARED_EXPORT TraceThread
 {
 public:
-    Scene();
+    TraceThread();
 };
 }
-//==============================================================================
-#endif // FAARAY_SCENE_H
+#endif // FAARAY_TRACETHREAD_H
