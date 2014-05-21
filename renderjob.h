@@ -13,6 +13,8 @@ class FAARAYSHARED_EXPORT RenderJob
 public:
     RenderJob();
 
+    void setViewPlaneSPtr(std::shared_ptr<ViewPlane> viewPlaneSPtr);
+
 private:
     std::shared_ptr<ViewPlane>  viewPlaneSPtr_;
     std::shared_ptr<Scene>      sceneSPtr_;
