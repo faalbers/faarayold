@@ -4,6 +4,8 @@
 //==============================================================================
 #include "faaray_global.h"
 #include "gfa/gfa.h"
+#include "gfa/rgbcolor.h"
+#include "gfa/rgbcolorbuffer.h"
 #include <memory>
 //==============================================================================
 namespace FaaRay {
@@ -12,6 +14,18 @@ class FAARAYSHARED_EXPORT ViewPlane
 public:
     ViewPlane();
     ViewPlane(const GFA::Size width, const GFA::Size height);
+
+    const GFA::Size   & width() const;
+    const GFA::Size   & height() const;
+
+    void setPixel(const GFA::Index &x, const GFA::Index &y,
+        const GFA::RGBColor &col) const;
+
+protected:
+    GFA::RGBColorBuffer         *frameBufferPtr_;
+
+    virtual void setGUIPixel_(const GFA::Index &x, const GFA::Index &y,
+        const GFA::RGBColor &col) const;
 };
 
 typedef std::shared_ptr<ViewPlane> ViewPlaneSPtr;
