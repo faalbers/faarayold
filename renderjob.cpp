@@ -39,6 +39,12 @@ void FaaRay::RenderJob::renderOneThread_() const
     // thread
     TraceThread tt;
     setupTraceThread_(tt);
+
+    // Init random seed
+    //tt.initRandom(0);
+
+    // Go through all pixels that neeed to be traced
+    std::size_t max = tt.width * tt.height;
 }
 //=============================================================================
 void FaaRay::RenderJob::renderMultiThread_() const
@@ -52,4 +58,7 @@ void FaaRay::RenderJob::setMultiThread()
 //=============================================================================
 void FaaRay::RenderJob::setupTraceThread_(TraceThread &ttRef) const
 {
+    // Optimization variables
+    //ttRef.width = ttRef.viewPlaneSPtr->width();
+    //ttRef.height = ttRef.viewPlaneSPtr->height();
 }
