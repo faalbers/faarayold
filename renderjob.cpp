@@ -9,6 +9,11 @@ FaaRay::RenderJob::RenderJob() :
 {
 }
 //==============================================================================
+FaaRay::SceneSPtr FaaRay::RenderJob::getSceneSPtr() const
+{
+    return sceneSPtr_;
+}
+//==============================================================================
 void FaaRay::RenderJob::setViewPlaneSPtr(ViewPlaneSPtr viewPlaneSPtr)
 {
     viewPlaneSPtr_.reset();

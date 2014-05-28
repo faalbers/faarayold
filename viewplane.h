@@ -18,14 +18,11 @@ public:
     const GFA::Size   & width() const;
     const GFA::Size   & height() const;
 
-    void setPixel(const GFA::Index &x, const GFA::Index &y,
+    virtual void setPixel(const GFA::Index &x, const GFA::Index &y,
         const GFA::RGBColor &col) const;
 
 protected:
     GFA::RGBColorBuffer         *frameBufferPtr_;
-
-    virtual void setGUIPixel_(const GFA::Index &x, const GFA::Index &y,
-        const GFA::RGBColor &col) const;
 };
 
 typedef std::shared_ptr<ViewPlane> ViewPlaneSPtr;

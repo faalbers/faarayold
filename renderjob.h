@@ -16,6 +16,8 @@ class FAARAYSHARED_EXPORT RenderJob
 public:
     RenderJob();
 
+    std::shared_ptr<Scene>      getSceneSPtr() const;
+
     void setViewPlaneSPtr(std::shared_ptr<ViewPlane> viewPlaneSPtr);
     void setMultiThread();
     void render() const;

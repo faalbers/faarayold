@@ -15,14 +15,16 @@ SOURCES += faaray.cpp \
     renderjob.cpp \
     viewplane.cpp \
     scene.cpp \
-    tracethread.cpp
+    tracethread.cpp \
+    testscenes.cpp
 
 HEADERS += faaray.h\
         faaray_global.h \
     renderjob.h \
     viewplane.h \
     scene.h \
-    tracethread.h
+    tracethread.h \
+    testscenes.h
 
 unix: CONFIG += c++11
 win32: QMAKE_CXXFLAGS += -std=c++11

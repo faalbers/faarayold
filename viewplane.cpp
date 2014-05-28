@@ -24,10 +24,4 @@ void FaaRay::ViewPlane::setPixel(
     const GFA::RGBColor &col) const
 {
     frameBufferPtr_->setPixel(x, y, col);
-    setGUIPixel_(x, y, col);
-}
-//==============================================================================
-void FaaRay::ViewPlane::setGUIPixel_(const GFA::Index &, const GFA::Index &,
-        const GFA::RGBColor &) const
-{
 }
