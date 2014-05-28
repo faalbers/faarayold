@@ -1,5 +1,7 @@
 #include "renderjob.h"
 #include "tracethread.h"
+#include "viewplane.h"
+#include "scene.h"
 #include <iostream>
 //==============================================================================
 FaaRay::RenderJob::RenderJob() :
@@ -41,7 +43,7 @@ void  FaaRay::RenderJob::render() const
 void FaaRay::RenderJob::renderOneThread_() const
 {
     //NOTE: Needs warning
-    //if (viewPlaneSPtr_ == 0 || sceneSPtr_ == 0) return;
+    if (viewPlaneSPtr_ == 0 || sceneSPtr_ == 0) return;
 
     // setup render pixel trace that will be refferenced through the whole
     // thread
@@ -73,6 +75,8 @@ void FaaRay::RenderJob::setupTraceThread_(TraceThread &ttRef) const
 {
     //NOTE: Should be shared pointers ?
     ttRef.viewPlaneSPtr = viewPlaneSPtr_;
+    ttRef.sceneSPtr = sceneSPtr_;
+    //ttRef.samplerSPtr = ttRef.viewPlaneSPtr->getConstSamplerSPtr();
 
     // Optimization variables
     ttRef.width = ttRef.viewPlaneSPtr->width();

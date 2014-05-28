@@ -1,4 +1,5 @@
 #include "viewplane.h"
+#include "sampler.h"
 //==============================================================================
 FaaRay::ViewPlane::ViewPlane()
 {
@@ -17,6 +18,20 @@ const GFA::Size & FaaRay::ViewPlane::width() const
 const GFA::Size & FaaRay::ViewPlane::height() const
 {
     return frameBufferPtr_->height();
+}
+//==============================================================================
+const GFA::Size & FaaRay::ViewPlane::numSamples() const
+{
+    return samplerSPtr_->numSamples();
+}
+//==============================================================================
+void FaaRay::ViewPlane::setNumSamples(const GFA::Size &numSamples)
+{
+    if (samplerSPtr_->numSamples() == numSamples) return;
+
+    // no need to reset prior samplerSPtr, this happens automatically
+    //if (numSamples > 1) samplerSPtr_ = MakeMultiJitteredSamplerSPtr(numSamples);
+    //else samplerSPtr_ = MakeRegularSamplerSPtr(numSamples);
 }
 //==============================================================================
 void FaaRay::ViewPlane::setPixel(

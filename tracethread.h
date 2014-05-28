@@ -5,13 +5,16 @@
 #include "faaray.h"
 #include "gfa/gfa.h"
 #include "gfa/rgbcolor.h"
+#include "gfa/point3d.h"
+#include "gfa/vector3d.h"
 #include <memory>
 //==============================================================================
 namespace FaaRay {
 
 class ViewPlane;
+class Scene;
 
-class FAARAYSHARED_EXPORT TraceThread
+class TraceThread
 {
 public:
     TraceThread();
@@ -27,10 +30,15 @@ public:
 
     // shared between threads, objects need to be const
     std::shared_ptr<const ViewPlane>    viewPlaneSPtr;
+    std::shared_ptr<const Scene>        sceneSPtr;
 
     // viewplane data
     GFA::Size       width;
     GFA::Size       height;
+
+    // ray data
+    GFA::Point3D    rayOrigin;
+    GFA::Vector3D   rayDirection;
 
 private:
     uint32_t    seedValue_;

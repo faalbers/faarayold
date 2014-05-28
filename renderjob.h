@@ -3,15 +3,15 @@
 #define FAARAY_RENDERJOB_H
 //==============================================================================
 #include "faaray_global.h"
-#include "viewplane.h"
-#include "scene.h"
 #include <memory>
 //==============================================================================
 namespace FaaRay {
 
 class TraceThread;
+class ViewPlane;
+class Scene;
 
-class FAARAYSHARED_EXPORT RenderJob
+class RenderJob
 {
 public:
     RenderJob();

@@ -16,7 +16,14 @@ SOURCES += faaray.cpp \
     viewplane.cpp \
     scene.cpp \
     tracethread.cpp \
-    testscenes.cpp
+    testscenes.cpp \
+    camera.cpp \
+    pinholecamera.cpp \
+    geometricobject.cpp \
+    sphere.cpp \
+    light.cpp \
+    pointlight.cpp \
+    sampler.cpp
 
 HEADERS += faaray.h\
         faaray_global.h \
@@ -24,7 +31,14 @@ HEADERS += faaray.h\
     viewplane.h \
     scene.h \
     tracethread.h \
-    testscenes.h
+    testscenes.h \
+    camera.h \
+    pinholecamera.h \
+    geometricobject.h \
+    sphere.h \
+    light.h \
+    pointlight.h \
+    sampler.h
 
 unix: CONFIG += c++11
 win32: QMAKE_CXXFLAGS += -std=c++11

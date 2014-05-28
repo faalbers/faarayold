@@ -1,5 +1,7 @@
 #include "tracethread.h"
 #include "viewplane.h"
+#include "scene.h"
+#include "camera.h"
 //==============================================================================
 FaaRay::TraceThread::TraceThread()
 {
@@ -7,9 +9,7 @@ FaaRay::TraceThread::TraceThread()
 //==============================================================================
 void FaaRay::TraceThread::render()
 {
-    color.r = 0.5;
-    color.g = 0.5;
-    color.b = 0.5;
+    sceneSPtr->getCameraSPtr()->render(*this);
     viewPlaneSPtr->setPixel(x, y, color);
 }
 //==============================================================================

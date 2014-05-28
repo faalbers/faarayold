@@ -5,10 +5,13 @@
 #include "scene.h"
 //==============================================================================
 namespace FaaRay {
-class FAARAYSHARED_EXPORT TestScenes
+
+class TestScenes
 {
 public:
     TestScenes(std::shared_ptr<Scene> sceneSPtr);
+
+    void addSetA() const;
 
 private:
     std::shared_ptr<Scene> sceneSPtr_;
