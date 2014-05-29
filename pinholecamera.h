@@ -17,6 +17,7 @@ public:
 
     void setViewPlaneDistance(const GFA::Scalar &viewPlaneDistance);
     void setZoom(const GFA::Scalar &zoom);
+    void setRayDirection(TraceThread &ttRef) const;
 
     virtual void render(TraceThread &ttRef) const;
 

@@ -23,7 +23,8 @@ SOURCES += faaray.cpp \
     sphere.cpp \
     light.cpp \
     pointlight.cpp \
-    sampler.cpp
+    sampler.cpp \
+    regularsampler.cpp
 
 HEADERS += faaray.h\
         faaray_global.h \
@@ -38,7 +39,8 @@ HEADERS += faaray.h\
     sphere.h \
     light.h \
     pointlight.h \
-    sampler.h
+    sampler.h \
+    regularsampler.h
 
 QMAKE_CXXFLAGS += -std=c++11
 QMAKE_CXXFLAGS += -fvisibility=hidden

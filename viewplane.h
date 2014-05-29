@@ -22,6 +22,8 @@ public:
     const GFA::Size   & height() const;
     const GFA::Size   & numSamples() const;
 
+    std::shared_ptr<const Sampler> getConstSamplerSPtr() const;
+
     void setNumSamples(const GFA::Size &numSamples);
 
     virtual void setPixel(const GFA::Index &x, const GFA::Index &y,
@@ -29,6 +31,7 @@ public:
 
 protected:
     GFA::RGBColorBuffer         *frameBufferPtr_;
+    GFA::Scalar                 pixelSize_;
     std::shared_ptr<Sampler>    samplerSPtr_;
 };
 
