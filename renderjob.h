@@ -11,7 +11,7 @@ class TraceThread;
 class ViewPlane;
 class Scene;
 
-class RenderJob
+class FAARAYSHARED_EXPORT RenderJob
 {
 public:
     RenderJob();

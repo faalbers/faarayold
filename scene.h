@@ -11,7 +11,7 @@ class Camera;
 class GeometricObject;
 class Light;
 
-class Scene
+class FAARAYSHARED_EXPORT Scene
 {
 public:
     Scene();

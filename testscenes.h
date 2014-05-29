@@ -6,7 +6,7 @@
 //==============================================================================
 namespace FaaRay {
 
-class TestScenes
+class FAARAYSHARED_EXPORT TestScenes
 {
 public:
     TestScenes(std::shared_ptr<Scene> sceneSPtr);

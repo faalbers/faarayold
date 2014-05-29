@@ -12,7 +12,7 @@ namespace FaaRay {
 
 class Sampler;
 
-class ViewPlane
+class FAARAYSHARED_EXPORT ViewPlane
 {
 public:
     ViewPlane();

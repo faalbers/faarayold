@@ -40,8 +40,8 @@ HEADERS += faaray.h\
     pointlight.h \
     sampler.h
 
-unix: CONFIG += c++11
-win32: QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -fvisibility=hidden
 
 unix {
     target.path = $$PWD/../inst/lib
@@ -62,3 +62,5 @@ unix|win32: LIBS += -L$$PWD/../inst/lib/ -lgfa
 
 INCLUDEPATH += $$PWD/../inst/include
 DEPENDPATH += $$PWD/../inst/include
+
+warning($$PWD)

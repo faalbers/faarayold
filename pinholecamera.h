@@ -10,7 +10,7 @@ namespace FaaRay {
 
 class TraceThread;
 
-class PinholeCamera : public Camera
+class FAARAYSHARED_EXPORT PinholeCamera : public Camera
 {
 public:
     PinholeCamera();
