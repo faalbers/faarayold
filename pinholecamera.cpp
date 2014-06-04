@@ -1,6 +1,7 @@
 #include "pinholecamera.h"
 #include "tracethread.h"
 #include "sampler.h"
+#include "tracer.h"
 //==============================================================================
 FaaRay::PinholeCamera::PinholeCamera()
 {
@@ -24,20 +25,17 @@ void FaaRay::PinholeCamera::render(TraceThread &ttRef) const
     ttRef.color.a = 0.0;
     ttRef.rayOrigin = eye_;
     GFA::Size numSamples = 0;
-    std::cout << ttRef.samplerSPtr << std::endl;
-    return;
     numSamples = ttRef.samplerSPtr->numSamples();
-    std::cout << numSamples << std::endl;
 
     GFA::Scalar xStart = ttRef.x - ttRef.halfWidth;
     GFA::Scalar yStart = ttRef.y - ttRef.halfHeight;
-    return;
     for (GFA::Index j = 0; j < numSamples; j++) {
-        //ttRef.sampleIndex = j;
-        //ttRef.samplerSPtr->setSampleUnitSquare(ttRef);
-        //ttRef.samplePoint.x = (xStart + ttRef.sampleUnitSquare.x) * ttRef.pixelSize;
-        //ttRef.samplePoint.y = (yStart + ttRef.sampleUnitSquare.y) * ttRef.pixelSize;
-        //setRayDirection(ttRef);
+        ttRef.sampleIndex = j;
+        ttRef.samplerSPtr->setSampleUnitSquare(ttRef);
+        ttRef.samplePoint.x = (xStart + ttRef.sampleUnitSquare.x) * ttRef.pixelSize;
+        ttRef.samplePoint.y = (yStart + ttRef.sampleUnitSquare.y) * ttRef.pixelSize;
+        setRayDirection(ttRef);
+        ttRef.tracerSPtr->traceRay(ttRef);
     }
 
 }
@@ -64,3 +62,7 @@ void FaaRay::PinholeCamera::setRayDirection(TraceThread &ttRef) const
     ttRef.rayDirection.normalize();
 }
 //==============================================================================
+FaaRay::PinholeCameraSPtr FaaRay::MakePinholeCameraSPtr()
+{
+    return std::make_shared<PinholeCamera>();
+}

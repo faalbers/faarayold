@@ -24,7 +24,9 @@ SOURCES += faaray.cpp \
     light.cpp \
     pointlight.cpp \
     sampler.cpp \
-    regularsampler.cpp
+    regularsampler.cpp \
+    tracer.cpp \
+    raycasttracer.cpp
 
 HEADERS += faaray.h\
         faaray_global.h \
@@ -40,7 +42,9 @@ HEADERS += faaray.h\
     light.h \
     pointlight.h \
     sampler.h \
-    regularsampler.h
+    regularsampler.h \
+    tracer.h \
+    raycasttracer.h
 
 QMAKE_CXXFLAGS += -std=c++11
 QMAKE_CXXFLAGS += -fvisibility=hidden

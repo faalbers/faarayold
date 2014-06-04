@@ -7,11 +7,13 @@
 //==============================================================================
 namespace FaaRay {
 
-class RegularSampler : public Sampler
+class FAARAYSHARED_EXPORT RegularSampler : public Sampler
 {
 public:
     RegularSampler();
     RegularSampler(const GFA::Size &numSamplesRef);
+
+    virtual void generateSamples();
 };
 typedef std::shared_ptr<RegularSampler>  RegularSamplerSPtr;
 RegularSamplerSPtr MakeRegularSamplerSPtr();

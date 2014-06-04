@@ -2,6 +2,7 @@
 #define SAMPLER_H
 //==============================================================================
 #include "faaray_global.h"
+#include "faaray.h"
 #include "gfa/gfa.h"
 #include "gfa/point2d.h"
 #include <memory>
@@ -18,6 +19,9 @@ public:
 
     const GFA::Size & numSamples() const;
 
+    virtual void generateSamples() = 0;
+    void setupShuffledIndices();
+
     void setSampleUnitSquare(TraceThread &ttRef) const;
 
 protected:
@@ -26,6 +30,7 @@ protected:
     GFA::Size                   numSets_;           // sample sets count
     std::vector<GFA::Point2D>   samples_;
     std::vector<GFA::Index>     shuffledIndices_;
+    MyRNG                       rng_;
 };
 typedef std::shared_ptr<Sampler>  SamplerSPtr;
 typedef std::shared_ptr<const Sampler>  ConstSamplerSPtr;

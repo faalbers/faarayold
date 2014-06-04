@@ -15,6 +15,7 @@ namespace FaaRay {
 class ViewPlane;
 class Scene;
 class Sampler;
+class Tracer;
 
 class TraceThread
 {
@@ -35,6 +36,7 @@ public:
     std::shared_ptr<const ViewPlane>    viewPlaneSPtr;
     std::shared_ptr<const Scene>        sceneSPtr;
     std::shared_ptr<const Sampler>      samplerSPtr;
+    std::shared_ptr<const Tracer>       tracerSPtr;
 
     // viewplane data
     GFA::Size       width;

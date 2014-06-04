@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "sampler.h"
 #include "camera.h"
+#include "tracer.h"
 //==============================================================================
 FaaRay::TraceThread::TraceThread()
 {

@@ -10,6 +10,7 @@ namespace FaaRay {
 class Camera;
 class GeometricObject;
 class Light;
+class Tracer;
 
 class FAARAYSHARED_EXPORT Scene
 {
@@ -18,6 +19,7 @@ public:
 
     // Setup methods
     void setCamera(std::shared_ptr<Camera> cameraSPtr);
+    void setTracer(std::shared_ptr<Tracer> tracerSPtr);
 
     // add methods
     void addObject(std::shared_ptr<GeometricObject> objectSPtr);
@@ -25,9 +27,11 @@ public:
 
     // Retrieving methods
     std::shared_ptr<Camera> getCameraSPtr() const;
+    std::shared_ptr<const Tracer> getConstTracerSPtr() const;
 
 private:
     std::shared_ptr<Camera>                         cameraSPtr_;
+    std::shared_ptr<Tracer>                         tracerSPtr_;
     std::vector<std::shared_ptr<GeometricObject>>   objectSPtrs_;
     std::vector<std::shared_ptr<Light>>             lightSPtrs_;
 };

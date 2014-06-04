@@ -26,5 +26,6 @@ private:
     GFA::Scalar zoom_;
 };
 typedef std::shared_ptr<PinholeCamera> PinholeCameraSPtr;
+PinholeCameraSPtr FAARAYSHARED_EXPORT MakePinholeCameraSPtr();
 }
 #endif // FAARAY_PINHOLECAMERA_H
