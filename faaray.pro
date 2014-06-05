@@ -46,8 +46,8 @@ HEADERS += faaray.h\
     tracer.h \
     raycasttracer.h
 
-QMAKE_CXXFLAGS += -std=c++11
-QMAKE_CXXFLAGS += -fvisibility=hidden
+unix: QMAKE_CXXFLAGS += -std=c++11
+unix: QMAKE_CXXFLAGS += -fvisibility=hidden
 
 unix {
     target.path = $$PWD/../inst/lib
@@ -69,4 +69,3 @@ unix|win32: LIBS += -L$$PWD/../inst/lib/ -lgfa
 INCLUDEPATH += $$PWD/../inst/include
 DEPENDPATH += $$PWD/../inst/include
 
-warning($$PWD)
