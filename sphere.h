@@ -8,12 +8,17 @@
 //==============================================================================
 namespace FaaRay {
 
+class TraceThread;
+
 class Sphere : public GeometricObject
 {
 public:
     Sphere();
 
     void setRadius(const GFA::Scalar &radius);
+
+    //raytrace methods
+    virtual void hit(TraceThread &ttRef, GFA::Scalar &tmin) const;
 
 private:
     GFA::Scalar     radius_;        // sphere radius

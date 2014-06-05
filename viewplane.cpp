@@ -26,6 +26,11 @@ const GFA::Size & FaaRay::ViewPlane::height() const
     return frameBufferPtr_->height();
 }
 //==============================================================================
+const GFA::Scalar & FaaRay::ViewPlane::pixelSize() const
+{
+    return pixelSize_;
+}
+//==============================================================================
 const GFA::Size & FaaRay::ViewPlane::numSamples() const
 {
     return samplerSPtr_->numSamples();

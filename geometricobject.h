@@ -8,6 +8,8 @@
 //==============================================================================
 namespace FaaRay {
 
+class TraceThread;
+
 class GeometricObject
 {
 public:
@@ -17,6 +19,9 @@ public:
         const GFA::Scalar &x,
         const GFA::Scalar &y,
         const GFA::Scalar &z);
+
+    //raytrace methods
+    virtual void hit(TraceThread &ttRef, GFA::Scalar &tmin) const = 0;
 
 protected:
     GFA::Point3D    center_;        // center point of object

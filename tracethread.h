@@ -8,6 +8,7 @@
 #include "gfa/point2d.h"
 #include "gfa/point3d.h"
 #include "gfa/vector3d.h"
+#include "gfa/normal.h"
 #include <memory>
 //==============================================================================
 namespace FaaRay {
@@ -54,6 +55,11 @@ public:
     // ray data
     GFA::Point3D    rayOrigin;
     GFA::Vector3D   rayDirection;
+
+    // ShadeRec (surface) data
+    bool            srHitAnObject;
+    GFA::Normal     srNormal;
+    GFA::RGBColor   srColor;
 
 private:
     uint32_t    seedValue_;

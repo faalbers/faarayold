@@ -71,4 +71,5 @@ void FaaRay::RenderJob::setupTraceThread_(TraceThread &ttRef) const
     ttRef.height = ttRef.viewPlaneSPtr->height();
     ttRef.halfWidth = ttRef.width * 0.5;
     ttRef.halfHeight = ttRef.height * 0.5;
+    ttRef.pixelSize = ttRef.viewPlaneSPtr->pixelSize();
 }

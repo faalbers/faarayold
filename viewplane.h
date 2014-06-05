@@ -18,8 +18,10 @@ public:
     ViewPlane();
     ViewPlane(const GFA::Size width, const GFA::Size height);
 
+    // Retrieval methods
     const GFA::Size   & width() const;
     const GFA::Size   & height() const;
+    const GFA::Scalar & pixelSize() const;
     const GFA::Size   & numSamples() const;
 
     std::shared_ptr<const Sampler> getConstSamplerSPtr() const;

@@ -11,6 +11,7 @@ class Camera;
 class GeometricObject;
 class Light;
 class Tracer;
+class TraceThread;
 
 class FAARAYSHARED_EXPORT Scene
 {
@@ -28,6 +29,9 @@ public:
     // Retrieving methods
     std::shared_ptr<Camera> getCameraSPtr() const;
     std::shared_ptr<const Tracer> getConstTracerSPtr() const;
+
+    // ray trace methods
+    void hitObjects(TraceThread &ttRef) const;
 
 private:
     std::shared_ptr<Camera>                         cameraSPtr_;

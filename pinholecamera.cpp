@@ -36,8 +36,9 @@ void FaaRay::PinholeCamera::render(TraceThread &ttRef) const
         ttRef.samplePoint.y = (yStart + ttRef.sampleUnitSquare.y) * ttRef.pixelSize;
         setRayDirection(ttRef);
         ttRef.tracerSPtr->traceRay(ttRef);
+        ttRef.color += ttRef.srColor;
     }
-
+    ttRef.color /= numSamples;
 }
 //==============================================================================
 void FaaRay::PinholeCamera::setRayDirection(TraceThread &ttRef) const
