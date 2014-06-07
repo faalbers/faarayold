@@ -4,6 +4,7 @@
 #include "sampler.h"
 #include "camera.h"
 #include "tracer.h"
+#include "material.h"
 //==============================================================================
 FaaRay::TraceThread::TraceThread()
 {

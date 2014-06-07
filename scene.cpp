@@ -50,7 +50,16 @@ void FaaRay::Scene::hitObjects(TraceThread &ttRef) const
     ttRef.srHitAnObject = false;
     for (GFA::Index j = 0; j < objectSPtrs_.size(); j++) {
         objectSPtrs_[j]->hit(ttRef, t);
-        //if (objectSPtrs_[j]->hit(ttRef, t) && (t < tmin)) {
-        //}
+        if (ttRef.srHitAnObject && (t < tmin)) {
+            ttRef.srHitAnObject = true;
+            tmin = t;
+            closestHit = j;
+        }
+    }
+
+    if (ttRef.srHitAnObject) {
+        // no need to delete prior srMaterialSPtr, this happens automatically
+        ttRef.srMaterialSPtr = objectSPtrs_[closestHit]->getMaterialSPtr();
+        ttRef.srHitPoint = ttRef.rayOrigin + ttRef.rayDirection * t;
     }
 }

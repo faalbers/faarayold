@@ -26,7 +26,9 @@ SOURCES += faaray.cpp \
     sampler.cpp \
     regularsampler.cpp \
     tracer.cpp \
-    raycasttracer.cpp
+    raycasttracer.cpp \
+    material.cpp \
+    mattematerial.cpp
 
 HEADERS += faaray.h\
         faaray_global.h \
@@ -44,7 +46,9 @@ HEADERS += faaray.h\
     sampler.h \
     regularsampler.h \
     tracer.h \
-    raycasttracer.h
+    raycasttracer.h \
+    material.h \
+    mattematerial.h
 
 unix: QMAKE_CXXFLAGS += -std=c++11
 unix: QMAKE_CXXFLAGS += -fvisibility=hidden

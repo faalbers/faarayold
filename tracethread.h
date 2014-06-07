@@ -17,6 +17,7 @@ class ViewPlane;
 class Scene;
 class Sampler;
 class Tracer;
+class Material;
 
 class TraceThread
 {
@@ -57,9 +58,11 @@ public:
     GFA::Vector3D   rayDirection;
 
     // ShadeRec (surface) data
-    bool            srHitAnObject;
-    GFA::Normal     srNormal;
-    GFA::RGBColor   srColor;
+    bool                            srHitAnObject;
+    GFA::Point3D                    srHitPoint;
+    GFA::Normal                     srNormal;
+    GFA::RGBColor                   srColor;
+    std::shared_ptr<const Material> srMaterialSPtr; // gets changed per hit point
 
 private:
     uint32_t    seedValue_;

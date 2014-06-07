@@ -18,9 +18,7 @@ void FaaRay::Sphere::hit(TraceThread &ttRef, GFA::Scalar& tmin) const
     GFA::Scalar b = 2.0 * (temp * ttRef.rayDirection);
     GFA::Scalar c = (temp * temp) - radiusQuad_;
     GFA::Scalar disc = (b * b) - (4 * c);
-    //std::cout << ttRef.x << " " << ttRef.y << std::endl;
-    //std::cout << ttRef.rayDirection << std::endl;
-    //std::cout << disc << std::endl;
+
     if (disc < 0.0) {
         ttRef.srHitAnObject = false;
         return;
@@ -41,5 +39,5 @@ void FaaRay::Sphere::hit(TraceThread &ttRef, GFA::Scalar& tmin) const
         ttRef.srNormal = (temp + ttRef.rayDirection * t) / radius_;
     }
 
-    //ttRef.srHitAnObject = true;
+    ttRef.srHitAnObject = true;
 }
