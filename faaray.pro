@@ -50,7 +50,7 @@ HEADERS += faaray.h\
     material.h \
     mattematerial.h
 
-unix: QMAKE_CXXFLAGS += -std=c++11
+unix: QMAKE_CXXFLAGS += -std=c++0x
 unix: QMAKE_CXXFLAGS += -fvisibility=hidden
 
 unix {
