@@ -23,8 +23,6 @@ void FaaRay::Sphere::hit(TraceThread &ttRef, GFA::Scalar& tmin) const
         ttRef.srHitAnObject = false;
         return;
     } else {
-        ttRef.srHitAnObject = true;
-        return;
         GFA::Scalar t;
         GFA::Scalar e = sqrt(disc);
         t = (-b - e) / 2.0; // smaller root

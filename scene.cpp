@@ -50,6 +50,11 @@ FaaRay::ConstLightSPtr FaaRay::Scene::getConstAmbientLightSPtr() const
     return ambientLightSPtr_;
 }
 //==============================================================================
+std::vector<std::shared_ptr<FaaRay::Light>> FaaRay::Scene::getLightsSPtrs() const
+{
+    return lightSPtrs_;
+}
+//==============================================================================
 void FaaRay::Scene::hitObjects(TraceThread &ttRef) const
 {
     GFA::Scalar t;

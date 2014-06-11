@@ -22,12 +22,17 @@ public:
         const GFA::Scalar &z);
     void setLs(const GFA::Scalar &ls);
 
+    void getDirection(TraceThread &ttRef) const;
+
     virtual void L(TraceThread &ttRef) const = 0;
+
+    const bool & castsShadows() const;
 
 protected:
     GFA::Point3D    center_;        // center point of object
     GFA::Scalar     ls_;     // light strength
     GFA::RGBColor   color_;  // light color
+    bool            shadows_;
 };
 typedef std::shared_ptr<Light> LightSPtr;
 typedef std::shared_ptr<const Light> ConstLightSPtr;

@@ -59,6 +59,10 @@ public:
     GFA::Point3D    rayOrigin;
     GFA::Vector3D   rayDirection;
 
+    // shadow ray data
+    GFA::Point3D    sRayOrigin;
+    GFA::Vector3D   sRayDirection;
+
     // ShadeRec (surface) data
     bool                            srHitAnObject;
     GFA::Point3D                    srHitPoint;
@@ -69,6 +73,9 @@ public:
     GFA::RGBColor                   srLightL;
     GFA::RGBColor                   srAmbientL;
     std::shared_ptr<const Material> srMaterialSPtr; // gets changed per hit point
+
+    // light data
+    GFA::Vector3D   lDirection;
 
 private:
     uint32_t    seedValue_;

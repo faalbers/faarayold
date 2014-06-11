@@ -31,6 +31,7 @@ public:
     std::shared_ptr<Camera> getCameraSPtr() const;
     std::shared_ptr<const Tracer> getConstTracerSPtr() const;
     std::shared_ptr<const Light> getConstAmbientLightSPtr() const;
+    std::vector<std::shared_ptr<Light>> getLightsSPtrs() const;
 
     // ray trace methods
     void hitObjects(TraceThread &ttRef) const;

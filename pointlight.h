@@ -15,6 +15,7 @@ public:
     PointLight();
 
     virtual void L(TraceThread &ttRef) const;
+
 };
 typedef std::shared_ptr<PointLight>  PointLightSPtr;
 }
