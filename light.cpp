@@ -1,6 +1,9 @@
 #include "light.h"
+#include "tracethread.h"
 //==============================================================================
-FaaRay::Light::Light()
+FaaRay::Light::Light() :
+    ls_(1.0),
+    color_(GFA::RGBColor(1.0, 1.0, 1.0))
 {
 }
 //==============================================================================
@@ -12,4 +15,9 @@ void FaaRay::Light::setCenter(
     center_.x = x;
     center_.y = y;
     center_.z = z;
+}
+//==============================================================================
+void FaaRay::Light::setLs(const GFA::Scalar &ls)
+{
+    ls_ = ls;
 }

@@ -65,6 +65,7 @@ void FaaRay::RenderJob::setupTraceThread_(TraceThread &ttRef) const
     ttRef.sceneSPtr = sceneSPtr_;
     ttRef.samplerSPtr = ttRef.viewPlaneSPtr->getConstSamplerSPtr();
     ttRef.tracerSPtr = ttRef.sceneSPtr->getConstTracerSPtr();
+    ttRef.ambientLightSPtr = ttRef.sceneSPtr->getConstAmbientLightSPtr();
 
     // Optimization variables
     ttRef.width = ttRef.viewPlaneSPtr->width();

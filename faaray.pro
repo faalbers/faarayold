@@ -28,7 +28,10 @@ SOURCES += faaray.cpp \
     tracer.cpp \
     raycasttracer.cpp \
     material.cpp \
-    mattematerial.cpp
+    mattematerial.cpp \
+    brdf.cpp \
+    lambertianbrdf.cpp \
+    ambientlight.cpp
 
 HEADERS += faaray.h\
         faaray_global.h \
@@ -48,7 +51,10 @@ HEADERS += faaray.h\
     tracer.h \
     raycasttracer.h \
     material.h \
-    mattematerial.h
+    mattematerial.h \
+    brdf.h \
+    lambertianbrdf.h \
+    ambientlight.h
 
 unix: QMAKE_CXXFLAGS += -std=c++0x
 unix: QMAKE_CXXFLAGS += -fvisibility=hidden

@@ -18,6 +18,7 @@ class Scene;
 class Sampler;
 class Tracer;
 class Material;
+class Light;
 
 class TraceThread
 {
@@ -39,6 +40,7 @@ public:
     std::shared_ptr<const Scene>        sceneSPtr;
     std::shared_ptr<const Sampler>      samplerSPtr;
     std::shared_ptr<const Tracer>       tracerSPtr;
+    std::shared_ptr<const Light>        ambientLightSPtr;
 
     // viewplane data
     GFA::Size       width;
@@ -62,6 +64,10 @@ public:
     GFA::Point3D                    srHitPoint;
     GFA::Normal                     srNormal;
     GFA::RGBColor                   srColor;
+    GFA::RGBColor                   srRhoColor; // diffuse calculated color
+    GFA::RGBColor                   srFColor;
+    GFA::RGBColor                   srLightL;
+    GFA::RGBColor                   srAmbientL;
     std::shared_ptr<const Material> srMaterialSPtr; // gets changed per hit point
 
 private:

@@ -20,6 +20,11 @@ void FaaRay::Scene::setTracer(TracerSPtr tracerSPtr)
     tracerSPtr_ = tracerSPtr;
 }
 //==============================================================================
+void FaaRay::Scene::setAmbientLight(LightSPtr ambientLightSPtr)
+{
+    ambientLightSPtr_ = ambientLightSPtr;
+}
+//==============================================================================
 void FaaRay::Scene::addObject(GeometricObjectSPtr objectSPtr)
 {
     objectSPtrs_.push_back(objectSPtr);
@@ -38,6 +43,11 @@ FaaRay::CameraSPtr FaaRay::Scene::getCameraSPtr() const
 FaaRay::ConstTracerSPtr FaaRay::Scene::getConstTracerSPtr() const
 {
     return tracerSPtr_;
+}
+//==============================================================================
+FaaRay::ConstLightSPtr FaaRay::Scene::getConstAmbientLightSPtr() const
+{
+    return ambientLightSPtr_;
 }
 //==============================================================================
 void FaaRay::Scene::hitObjects(TraceThread &ttRef) const

@@ -7,6 +7,9 @@
 //==============================================================================
 namespace FaaRay {
 
+class TraceThread;
+class LambertianBRDF;
+
 class MatteMaterial : public Material
 {
 public:
@@ -16,6 +19,12 @@ public:
         const GFA::Scalar &r,
         const GFA::Scalar &g,
         const GFA::Scalar &b) const;
+
+    virtual void shade(TraceThread &ttRef) const;
+
+private:
+    std::shared_ptr<LambertianBRDF>  ambientBrdfSPtr_;
+    std::shared_ptr<LambertianBRDF>  diffuseBrdfSPtr_;
 };
 typedef std::shared_ptr<MatteMaterial>  MatteMaterialSPtr;
 }

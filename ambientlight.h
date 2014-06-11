@@ -1,21 +1,24 @@
-#ifndef POINTLIGHT_H
-#define POINTLIGHT_H
+#ifndef FAARAY_AMBIENTLIGHT_H
+#define FAARAY_AMBIENTLIGHT_H
 //==============================================================================
 #include "faaray_global.h"
 #include "light.h"
+#include "gfa/gfa.h"
 #include <memory>
 //==============================================================================
 namespace FaaRay {
 
 class TraceThread;
 
-class PointLight : public Light
+class FAARAYSHARED_EXPORT AmbientLight : public Light
 {
 public:
-    PointLight();
+    AmbientLight();
 
     virtual void L(TraceThread &ttRef) const;
+
 };
-typedef std::shared_ptr<PointLight>  PointLightSPtr;
+typedef std::shared_ptr<AmbientLight>  AmbientLightSPtr;
+AmbientLightSPtr FAARAYSHARED_EXPORT MakeAmbientLightSPtr();
 }
-#endif // POINTLIGHT_H
+#endif // FAARAY_AMBIENTLIGHT_H

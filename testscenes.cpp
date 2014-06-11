@@ -16,7 +16,7 @@ void FaaRay::TestScenes::addSetA() const
     FaaRay::MatteMaterialSPtr matteMaterialASPtr(new FaaRay::MatteMaterial);
     matteMaterialASPtr->setCd(1.0, 1.0, 0.0);
 
-    // Add set models
+    // Add set objects
 
     // Add sphere annd attach material
     SphereSPtr sphereSPtr(new Sphere);
