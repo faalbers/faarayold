@@ -34,7 +34,8 @@ public:
     std::vector<std::shared_ptr<Light>> getLightsSPtrs() const;
 
     // ray trace methods
-    void hitObjects(TraceThread &ttRef) const;
+    void objectsHit(TraceThread &ttRef, bool closest) const;
+    void lightsShade(TraceThread &ttRef) const;
 
 private:
     std::shared_ptr<Camera>                         cameraSPtr_;

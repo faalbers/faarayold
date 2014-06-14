@@ -12,6 +12,7 @@ public:
     TestScenes(std::shared_ptr<Scene> sceneSPtr);
 
     void addSetA() const;
+    void addSetB() const;
 
 private:
     std::shared_ptr<Scene> sceneSPtr_;

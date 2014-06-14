@@ -1,5 +1,5 @@
-#ifndef SAMPLER_H
-#define SAMPLER_H
+#ifndef FAARAY_SAMPLER_H
+#define FAARAY_SAMPLER_H
 //==============================================================================
 #include "faaray_global.h"
 #include "faaray.h"
@@ -31,8 +31,10 @@ protected:
     std::vector<GFA::Point2D>   samples_;
     std::vector<GFA::Index>     shuffledIndices_;
     MyRNG                       rng_;
+    std::uniform_real_distribution<GFA::Scalar> distribution;
+    GFA::Scalar                 rand_();
 };
 typedef std::shared_ptr<Sampler>  SamplerSPtr;
 typedef std::shared_ptr<const Sampler>  ConstSamplerSPtr;
 }
-#endif // SAMPLER_H
+#endif // FAARAY_SAMPLER_H

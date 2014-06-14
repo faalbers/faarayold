@@ -16,17 +16,19 @@ class GeometricObject
 public:
     GeometricObject();
 
+    // Set methodes
     void setCenter(
         const GFA::Scalar &x,
         const GFA::Scalar &y,
         const GFA::Scalar &z);
-
-    // Material methods
     void setMaterialSPtr(std::shared_ptr<const Material> materialSPtr);
+
+    // Get methods
+    const GFA::Point3D & getCenter() const;
     std::shared_ptr<const Material> getMaterialSPtr() const;
 
     //raytrace methods
-    virtual void hit(TraceThread &ttRef, GFA::Scalar &tmin) const = 0;
+    virtual bool hit(TraceThread &ttRef) const = 0;
 
 protected:
     GFA::Point3D    center_;        // center point of object

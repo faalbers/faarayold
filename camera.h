@@ -18,6 +18,7 @@ public:
     void setEye(const GFA::Point3D &eye);
     void setLookAt(const GFA::Point3D &lookAt);
 
+    virtual void    renderOpt(TraceThread &rp) const = 0;
     virtual void    render(TraceThread &rp) const = 0;
 
 protected:

@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "tracer.h"
 #include "material.h"
+#include "geometricobject.h"
 #include "light.h"
 //==============================================================================
 FaaRay::TraceThread::TraceThread()
@@ -22,6 +23,20 @@ void FaaRay::TraceThread::render()
     }
 
     cameraSPtr->render(*this);
+    viewPlaneSPtr->setPixel(x, y, color);
+}
+//==============================================================================
+void FaaRay::TraceThread::renderOpt()
+{
+    CameraSPtr cameraSPtr = sceneSPtr->getCameraSPtr();
+
+    //NOTE: Handle this better
+    if (cameraSPtr == 0) {
+        std::cout << "Scene has no camera" << std::endl;
+        return;
+    }
+
+    cameraSPtr->renderOpt(*this);
     viewPlaneSPtr->setPixel(x, y, color);
 }
 //==============================================================================

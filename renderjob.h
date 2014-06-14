@@ -1,4 +1,3 @@
-//==============================================================================
 #ifndef FAARAY_RENDERJOB_H
 #define FAARAY_RENDERJOB_H
 //==============================================================================
@@ -28,8 +27,10 @@ private:
     bool                        multiThread_;
 
     void renderOneThread_() const;
+    void renderOneThreadOpt_() const;
     void renderMultiThread_() const;
     void setupTraceThread_(TraceThread &rt) const;
+    void setupTraceThreadOpt_(TraceThread &rt) const;
 };
 }
 

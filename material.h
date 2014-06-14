@@ -13,6 +13,7 @@ public:
     Material();
 
     virtual void shade(TraceThread &ttRef) const = 0;
+    virtual void shadeLight(TraceThread &ttRef) const = 0;
 };
 typedef std::shared_ptr<Material>  MaterialSPtr;
 typedef std::shared_ptr<const Material>  ConstMaterialSPtr;

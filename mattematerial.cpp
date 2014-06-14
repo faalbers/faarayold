@@ -28,48 +28,29 @@ void FaaRay::MatteMaterial::shade(TraceThread &ttRef) const
     ttRef.srColor = ttRef.srRhoColor * ttRef.srAmbientL;
 
     // Add receiving lights.
-    //ttRef.sceneSPtr->applyLights(ttRef);
+    ttRef.sceneSPtr->lightsShade(ttRef);
+}
+//==============================================================================
+void FaaRay::MatteMaterial::shadeLight(TraceThread &ttRef) const
+{
+    // Additiveliy shade current light handled by the trace
     GFA::Scalar ndotwi;
-    std::vector<std::shared_ptr<Light>>::iterator it;
-    std::vector<std::shared_ptr<Light>> lightsSPtrs = ttRef.sceneSPtr->getLightsSPtrs();
-    for (it = lightsSPtrs.begin() ; it < lightsSPtrs.end(); it++) {
-        (*it)->getDirection(ttRef);
-        ndotwi = ttRef.lDirection * ttRef.srNormal;
-        // check if hitpoint receives light
-        if (ndotwi > 0.0) {
-            // check if ray casts shadows
-            if ((*it)->castsShadows()) {
-                ttRef.sRayOrigin = ttRef.srHitPoint;
-                ttRef.sRayDirection = ttRef.lDirection;
-            } else {
-                (*it)->L(ttRef);
+    ttRef.srLightSPtr->getDirection(ttRef);
+    ndotwi = ttRef.lDirection * ttRef.srNormal;
+    // check if hitpoint receives light
+    if (ndotwi > 0.0) {
+        // check if ray casts shadows
+        if (ttRef.srLightSPtr->castsShadows()) {
+            ttRef.rayOrigin = ttRef.srHitPoint;
+            ttRef.rayDirection = ttRef.lDirection;
+            ttRef.sceneSPtr->objectsHit(ttRef, false);
+            if (!ttRef.hitAnObject) {
+                ttRef.srLightSPtr->L(ttRef);
                 ttRef.srColor += ttRef.srFColor * ttRef.srLightL * ndotwi;
             }
+        } else {
+            ttRef.srLightSPtr->L(ttRef);
+            ttRef.srColor += ttRef.srFColor * ttRef.srLightL * ndotwi;
         }
     }
-    /*
-    int numLights = ttRef.sceneSPtr->lightSPtrs_.size();
-    for (GFA::Index j = 0; j < numLights; j++) {
-        std::cout << "Handling Light #" << j << std::endl;
-    }
-    */
-    /*
-    GFA::Scalar ndotwi;
-    for (GFA::Index j = 0; j < lightSPtrs_.size(); j++) {
-        lightSPtrs_[j]->getDirection(ttRef);
-        ndotwi = ttRef.lDirection * ttRef.srNormal;
-        if (ndotwi > 0.0) {
-            if (lightSPtrs_[j]->castsShadows())
-                ttRef.sRayOrigin = srHitPoint;
-                ttRef.sRayDirection = ttRef.lDirection;
-                shadowHitObjects(ttRef);
-
-            if ( !ttRef.sRayInShadow ) {
-                lightSPtrs_[j]->L(ttRef);
-                ttRef.srColor += ttRef.srFColor * ttRef.srLightL * ndotwi;
-            }
-        }
-    }
-    */
-
 }

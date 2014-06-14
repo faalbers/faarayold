@@ -4,6 +4,7 @@
 #include "light.h"
 #include "tracer.h"
 #include "tracethread.h"
+#include "material.h"
 //==============================================================================
 FaaRay::Scene::Scene()
 {
@@ -55,26 +56,34 @@ std::vector<std::shared_ptr<FaaRay::Light>> FaaRay::Scene::getLightsSPtrs() cons
     return lightSPtrs_;
 }
 //==============================================================================
-void FaaRay::Scene::hitObjects(TraceThread &ttRef) const
+void FaaRay::Scene::objectsHit(TraceThread &ttRef, bool closest) const
 {
-    GFA::Scalar t;
     GFA::Scalar tmin = GFA::HUGE_SCALAR;
     GFA::Index  closestHit = 0;
 
     // Find closest hit
-    ttRef.srHitAnObject = false;
+    ttRef.hitAnObject = false;
     for (GFA::Index j = 0; j < objectSPtrs_.size(); j++) {
-        objectSPtrs_[j]->hit(ttRef, t);
-        if (ttRef.srHitAnObject && (t < tmin)) {
-            ttRef.srHitAnObject = true;
-            tmin = t;
+        if (objectSPtrs_[j]->hit(ttRef) && (ttRef.hitDistance < tmin)) {
+            ttRef.hitAnObject = true;
+            tmin = ttRef.hitDistance;
+            // optimize if closest objects is not needed
+            if (!closest) return;
             closestHit = j;
         }
     }
 
-    if (ttRef.srHitAnObject) {
-        // no need to delete prior srMaterialSPtr, this happens automatically
-        ttRef.srMaterialSPtr = objectSPtrs_[closestHit]->getMaterialSPtr();
-        ttRef.srHitPoint = ttRef.rayOrigin + ttRef.rayDirection * t;
+    if (ttRef.hitAnObject) {
+        ttRef.hitObjectSPtr = objectSPtrs_[closestHit];
+        ttRef.hitDistance = tmin;
+    }
+}
+//==============================================================================
+void FaaRay::Scene::lightsShade(TraceThread &ttRef) const
+{
+    std::vector<std::shared_ptr<Light>>::const_iterator it;
+    for (it = lightSPtrs_.begin() ; it < lightSPtrs_.end(); it++) {
+        ttRef.srLightSPtr = *it;
+        ttRef.srMaterialSPtr->shadeLight(ttRef);
     }
 }

@@ -1,6 +1,7 @@
 #include "viewplane.h"
 #include "sampler.h"
 #include "regularsampler.h"
+#include "multijitteredsampler.h"
 //==============================================================================
 FaaRay::ViewPlane::ViewPlane() :
     frameBufferPtr_(new GFA::RGBColorBuffer),
@@ -11,6 +12,7 @@ FaaRay::ViewPlane::ViewPlane() :
 //==============================================================================
 FaaRay::ViewPlane::ViewPlane(const GFA::Size width, const GFA::Size height) :
     frameBufferPtr_(new GFA::RGBColorBuffer(width, height)),
+    //pixelSize_(10.0/256.0),
     pixelSize_(10.0/256.0),
     samplerSPtr_(new RegularSampler(1))
 {
@@ -46,9 +48,9 @@ void FaaRay::ViewPlane::setNumSamples(const GFA::Size &numSamples)
     if (samplerSPtr_->numSamples() == numSamples) return;
 
     // no need to reset prior samplerSPtr, this happens automatically
-    samplerSPtr_ = MakeRegularSamplerSPtr(numSamples);
-    //if (numSamples > 1) samplerSPtr_ = MakeMultiJitteredSamplerSPtr(numSamples);
-    //else samplerSPtr_ = MakeRegularSamplerSPtr(numSamples);
+    //samplerSPtr_ = MakeRegularSamplerSPtr(numSamples);
+    if (numSamples > 1) samplerSPtr_ = MakeMultiJitteredSamplerSPtr(numSamples);
+    else samplerSPtr_ = MakeRegularSamplerSPtr(numSamples);
 }
 //==============================================================================
 void FaaRay::ViewPlane::setPixel(

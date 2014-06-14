@@ -31,7 +31,8 @@ SOURCES += faaray.cpp \
     mattematerial.cpp \
     brdf.cpp \
     lambertianbrdf.cpp \
-    ambientlight.cpp
+    ambientlight.cpp \
+    multijitteredsampler.cpp
 
 HEADERS += faaray.h\
         faaray_global.h \
@@ -54,7 +55,8 @@ HEADERS += faaray.h\
     mattematerial.h \
     brdf.h \
     lambertianbrdf.h \
-    ambientlight.h
+    ambientlight.h \
+    multijitteredsampler.h
 
 unix: QMAKE_CXXFLAGS += -std=c++0x
 unix: QMAKE_CXXFLAGS += -fvisibility=hidden

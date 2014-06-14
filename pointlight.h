@@ -1,5 +1,5 @@
-#ifndef POINTLIGHT_H
-#define POINTLIGHT_H
+#ifndef FAARAY_POINTLIGHT_H
+#define FAARAY_POINTLIGHT_H
 //==============================================================================
 #include "faaray_global.h"
 #include "light.h"
@@ -19,4 +19,4 @@ public:
 };
 typedef std::shared_ptr<PointLight>  PointLightSPtr;
 }
-#endif // POINTLIGHT_H
+#endif // FAARAY_POINTLIGHT_H

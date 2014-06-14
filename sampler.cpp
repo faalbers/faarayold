@@ -70,3 +70,9 @@ void FaaRay::Sampler::setSampleUnitSquare(TraceThread &ttRef) const
     ttRef.sampleUnitSquare.x = samples_[newIndex].x;
     ttRef.sampleUnitSquare.y = samples_[newIndex].y;
 }
+//==============================================================================
+// Get next random scalar between 0.0 and less then 1.0
+GFA::Scalar FaaRay::Sampler::rand_()
+{
+    return distribution(rng_);
+}

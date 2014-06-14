@@ -21,6 +21,7 @@ public:
         const GFA::Scalar &b) const;
 
     virtual void shade(TraceThread &ttRef) const;
+    virtual void shadeLight(TraceThread &ttRef) const;
 
 private:
     std::shared_ptr<LambertianBRDF>  ambientBrdfSPtr_;

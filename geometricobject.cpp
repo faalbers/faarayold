@@ -20,6 +20,11 @@ void FaaRay::GeometricObject::setMaterialSPtr(ConstMaterialSPtr materialSPtr)
     materialSPtr_ = materialSPtr;
 }
 //==============================================================================
+const GFA::Point3D & FaaRay::GeometricObject::getCenter() const
+{
+    return center_;
+}
+//==============================================================================
 FaaRay::ConstMaterialSPtr FaaRay::GeometricObject::getMaterialSPtr() const
 {
     return materialSPtr_;

@@ -1,5 +1,5 @@
-#ifndef SPHERE_H
-#define SPHERE_H
+#ifndef FAARAY_SPHERE_H
+#define FAARAY_SPHERE_H
 //==============================================================================
 #include "faaray_global.h"
 #include "gfa/point3d.h"
@@ -18,12 +18,13 @@ public:
     void setRadius(const GFA::Scalar &radius);
 
     //raytrace methods
-    virtual void hit(TraceThread &ttRef, GFA::Scalar &tmin) const;
+    virtual bool hit(TraceThread &ttRef) const;
 
 private:
     GFA::Scalar     radius_;        // sphere radius
     GFA::Scalar     radiusQuad_;    // quadratic sphere radius
 };
 typedef std::shared_ptr<Sphere> SphereSPtr;
+SphereSPtr MakeSphereSPtr();
 }
-#endif // SPHERE_H
+#endif // FAARAY_SPHERE_H

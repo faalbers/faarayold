@@ -2,6 +2,7 @@
 #include "tracethread.h"
 #include "sampler.h"
 #include "tracer.h"
+#include "viewplane.h"
 //==============================================================================
 FaaRay::PinholeCamera::PinholeCamera()
 {
@@ -18,7 +19,7 @@ void FaaRay::PinholeCamera::setZoom(const GFA::Scalar &zoom)
     zoom_ = zoom;
 }
 //==============================================================================
-void FaaRay::PinholeCamera::render(TraceThread &ttRef) const
+void FaaRay::PinholeCamera::renderOpt(TraceThread &ttRef) const
 {
     // best optimization for more samples
     ttRef.color.r = 0.0; ttRef.color.g = 0.0; ttRef.color.b = 0.0;
@@ -39,6 +40,32 @@ void FaaRay::PinholeCamera::render(TraceThread &ttRef) const
         ttRef.color += ttRef.srColor;
     }
     ttRef.color /= numSamples;
+}
+//==============================================================================
+void FaaRay::PinholeCamera::render(TraceThread &ttRef) const
+{
+    std::shared_ptr<const Sampler> samplerSPtr =
+        ttRef.viewPlaneSPtr->getConstSamplerSPtr();
+
+    // Initialize color
+    ttRef.color.r = 0.0; ttRef.color.g = 0.0; ttRef.color.b = 0.0;
+    ttRef.color.a = 0.0;
+
+    GFA::Scalar xStart = ttRef.x - ttRef.viewPlaneSPtr->width() * 0.5;
+    GFA::Scalar yStart = ttRef.y - ttRef.viewPlaneSPtr->height() * 0.5;
+    for (GFA::Index j = 0; j < samplerSPtr->numSamples(); j++) {
+        ttRef.sampleIndex = j;
+        samplerSPtr->setSampleUnitSquare(ttRef);
+        ttRef.samplePoint.x = (xStart + ttRef.sampleUnitSquare.x)
+                * ttRef.viewPlaneSPtr->pixelSize();
+        ttRef.samplePoint.y = (yStart + ttRef.sampleUnitSquare.y)
+                * ttRef.viewPlaneSPtr->pixelSize();
+        setRayDirection(ttRef);
+        std::cout << ttRef.viewPlaneSPtr->pixelSize() << std::endl;
+        //ttRef.tracerSPtr->traceRay(ttRef);
+        ttRef.color += ttRef.srColor;
+    }
+    ttRef.color /= samplerSPtr->numSamples();
 }
 //==============================================================================
 void FaaRay::PinholeCamera::setRayDirection(TraceThread &ttRef) const
