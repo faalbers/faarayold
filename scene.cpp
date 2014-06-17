@@ -79,11 +79,20 @@ void FaaRay::Scene::objectsHit(TraceThread &ttRef, bool closest) const
     }
 }
 //==============================================================================
-void FaaRay::Scene::lightsShade(TraceThread &ttRef) const
+void FaaRay::Scene::lightsShadeOpt(TraceThread &ttRef) const
 {
     std::vector<std::shared_ptr<Light>>::const_iterator it;
     for (it = lightSPtrs_.begin() ; it < lightSPtrs_.end(); it++) {
         ttRef.srLightSPtr = *it;
         ttRef.srMaterialSPtr->shadeLight(ttRef);
+    }
+}
+//==============================================================================
+void FaaRay::Scene::lightsShade(TraceThread &ttRef) const
+{
+    std::vector<std::shared_ptr<Light>>::const_iterator it;
+    for (it = lightSPtrs_.begin() ; it < lightSPtrs_.end(); it++) {
+        ttRef.srLightSPtr = *it;
+        ttRef.hitObjectSPtr->getConstMaterialSPtr()->shadeLight(ttRef);
     }
 }

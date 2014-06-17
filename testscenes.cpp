@@ -59,3 +59,25 @@ void FaaRay::TestScenes::addSetB() const
     pointLightASPtr->setLs(2);
     sceneSPtr_->addLight(pointLightASPtr);
 }
+//==============================================================================
+void FaaRay::TestScenes::addSetC() const
+{
+    // Create materials to be used
+    FaaRay::MatteMaterialSPtr matteMaterialASPtr(new FaaRay::MatteMaterial);
+    matteMaterialASPtr->setCd(1.0, 1.0, 0.0);
+
+    // Add set objects
+
+    // Add spheres annd attach material
+    SphereSPtr sphereSPtr(new Sphere);
+    sphereSPtr->setCenter(0, 0, 0);
+    sphereSPtr->setRadius(0.1);
+    sphereSPtr->setMaterialSPtr(matteMaterialASPtr);
+    sceneSPtr_->addObject(sphereSPtr);
+
+    //Add Lights
+    PointLightSPtr pointLightASPtr(new PointLight);
+    pointLightASPtr->setCenter(15, 15, 15);
+    pointLightASPtr->setLs(2);
+    sceneSPtr_->addLight(pointLightASPtr);
+}

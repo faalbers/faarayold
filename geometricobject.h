@@ -25,7 +25,7 @@ public:
 
     // Get methods
     const GFA::Point3D & getCenter() const;
-    std::shared_ptr<const Material> getMaterialSPtr() const;
+    std::shared_ptr<const Material> getConstMaterialSPtr() const;
 
     //raytrace methods
     virtual bool hit(TraceThread &ttRef) const = 0;

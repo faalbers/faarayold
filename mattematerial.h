@@ -20,6 +20,7 @@ public:
         const GFA::Scalar &g,
         const GFA::Scalar &b) const;
 
+    virtual void shadeOpt(TraceThread &ttRef) const;
     virtual void shade(TraceThread &ttRef) const;
     virtual void shadeLight(TraceThread &ttRef) const;
 

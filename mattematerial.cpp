@@ -19,12 +19,24 @@ void FaaRay::MatteMaterial::setCd(
     diffuseBrdfSPtr_->setCd(r, g, b);
 }
 //==============================================================================
-void FaaRay::MatteMaterial::shade(TraceThread &ttRef) const
+void FaaRay::MatteMaterial::shadeOpt(TraceThread &ttRef) const
 {
     // Ambient BRDF reflectance mult Ambient Light
     ambientBrdfSPtr_->rho(ttRef);
     diffuseBrdfSPtr_->f(ttRef);
     ttRef.ambientLightSPtr->L(ttRef);
+    ttRef.srColor = ttRef.srRhoColor * ttRef.srAmbientL;
+
+    // Add receiving lights.
+    ttRef.sceneSPtr->lightsShade(ttRef);
+}
+//==============================================================================
+void FaaRay::MatteMaterial::shade(TraceThread &ttRef) const
+{
+    // Ambient BRDF reflectance mult Ambient Light
+    ambientBrdfSPtr_->rho(ttRef);
+    diffuseBrdfSPtr_->f(ttRef);
+    ttRef.sceneSPtr->getConstAmbientLightSPtr()->L(ttRef);
     ttRef.srColor = ttRef.srRhoColor * ttRef.srAmbientL;
 
     // Add receiving lights.

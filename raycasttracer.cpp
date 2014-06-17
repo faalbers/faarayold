@@ -8,17 +8,29 @@ FaaRay::RayCastTracer::RayCastTracer()
 {
 }
 //==============================================================================
+void FaaRay::RayCastTracer::traceRayOpt(TraceThread &ttRef) const
+{
+    ttRef.sceneSPtr->objectsHit(ttRef, true);
+    if(ttRef.hitAnObject) {
+        ttRef.srMaterialSPtr = ttRef.hitObjectSPtr->getConstMaterialSPtr();
+        ttRef.srHitPoint = ttRef.rayOrigin + ttRef.rayDirection * ttRef.hitDistance;
+        ttRef.srNormal = ttRef.hitNormal;
+
+        ttRef.srMaterialSPtr->shadeOpt(ttRef);
+    } else {
+        ttRef.srColor.r = 0.0; ttRef.srColor.g = 0.0; ttRef.srColor.b = 0.0;
+        ttRef.srColor.a = 0.0;
+    }
+}
+//==============================================================================
 void FaaRay::RayCastTracer::traceRay(TraceThread &ttRef) const
 {
     ttRef.sceneSPtr->objectsHit(ttRef, true);
     if(ttRef.hitAnObject) {
-        ttRef.srMaterialSPtr = ttRef.hitObjectSPtr->getMaterialSPtr();
         ttRef.srHitPoint = ttRef.rayOrigin + ttRef.rayDirection * ttRef.hitDistance;
         ttRef.srNormal = ttRef.hitNormal;
 
-        ttRef.srMaterialSPtr->shade(ttRef);
-        //ttRef.srColor.r = 1.0; ttRef.srColor.g = 1.0; ttRef.srColor.b = 1.0;
-        //ttRef.srColor.a = 1.0;
+        ttRef.hitObjectSPtr->getConstMaterialSPtr()->shade(ttRef);
     } else {
         ttRef.srColor.r = 0.0; ttRef.srColor.g = 0.0; ttRef.srColor.b = 0.0;
         ttRef.srColor.a = 0.0;

@@ -14,6 +14,7 @@ class FAARAYSHARED_EXPORT Tracer
 public:
     Tracer();
 
+    virtual void traceRayOpt(TraceThread &ttRef) const = 0;
     virtual void traceRay(TraceThread &ttRef) const = 0;
 };
 typedef std::shared_ptr<Tracer> TracerSPtr;

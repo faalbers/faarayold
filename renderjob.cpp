@@ -27,7 +27,8 @@ void  FaaRay::RenderJob::render() const
     if (multiThread_)
         renderMultiThread_();
     else
-        renderOneThreadOpt_();
+        // temporary decide here for Opt or normal version
+        renderOneThread_();
 }
 //=============================================================================
 void FaaRay::RenderJob::renderOneThread_() const

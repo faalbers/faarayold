@@ -12,6 +12,7 @@ class Material
 public:
     Material();
 
+    virtual void shadeOpt(TraceThread &ttRef) const = 0;
     virtual void shade(TraceThread &ttRef) const = 0;
     virtual void shadeLight(TraceThread &ttRef) const = 0;
 };

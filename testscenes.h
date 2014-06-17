@@ -13,6 +13,7 @@ public:
 
     void addSetA() const;
     void addSetB() const;
+    void addSetC() const;
 
 private:
     std::shared_ptr<Scene> sceneSPtr_;

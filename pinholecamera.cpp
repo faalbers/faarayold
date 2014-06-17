@@ -3,6 +3,7 @@
 #include "sampler.h"
 #include "tracer.h"
 #include "viewplane.h"
+#include "scene.h"
 //==============================================================================
 FaaRay::PinholeCamera::PinholeCamera()
 {
@@ -36,7 +37,7 @@ void FaaRay::PinholeCamera::renderOpt(TraceThread &ttRef) const
         ttRef.samplePoint.x = (xStart + ttRef.sampleUnitSquare.x) * ttRef.pixelSize;
         ttRef.samplePoint.y = (yStart + ttRef.sampleUnitSquare.y) * ttRef.pixelSize;
         setRayDirection(ttRef);
-        ttRef.tracerSPtr->traceRay(ttRef);
+        ttRef.tracerSPtr->traceRayOpt(ttRef);
         ttRef.color += ttRef.srColor;
     }
     ttRef.color /= numSamples;
@@ -50,6 +51,7 @@ void FaaRay::PinholeCamera::render(TraceThread &ttRef) const
     // Initialize color
     ttRef.color.r = 0.0; ttRef.color.g = 0.0; ttRef.color.b = 0.0;
     ttRef.color.a = 0.0;
+    ttRef.rayOrigin = eye_;
 
     GFA::Scalar xStart = ttRef.x - ttRef.viewPlaneSPtr->width() * 0.5;
     GFA::Scalar yStart = ttRef.y - ttRef.viewPlaneSPtr->height() * 0.5;
@@ -61,8 +63,7 @@ void FaaRay::PinholeCamera::render(TraceThread &ttRef) const
         ttRef.samplePoint.y = (yStart + ttRef.sampleUnitSquare.y)
                 * ttRef.viewPlaneSPtr->pixelSize();
         setRayDirection(ttRef);
-        std::cout << ttRef.viewPlaneSPtr->pixelSize() << std::endl;
-        //ttRef.tracerSPtr->traceRay(ttRef);
+        ttRef.sceneSPtr->getConstTracerSPtr()->traceRay(ttRef);
         ttRef.color += ttRef.srColor;
     }
     ttRef.color /= samplerSPtr->numSamples();

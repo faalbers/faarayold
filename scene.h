@@ -35,6 +35,7 @@ public:
 
     // ray trace methods
     void objectsHit(TraceThread &ttRef, bool closest) const;
+    void lightsShadeOpt(TraceThread &ttRef) const;
     void lightsShade(TraceThread &ttRef) const;
 
 private:
