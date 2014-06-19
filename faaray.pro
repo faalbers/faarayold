@@ -81,3 +81,6 @@ unix|win32: LIBS += -L$$PWD/../inst/lib/ -lgfa
 INCLUDEPATH += $$PWD/../inst/include
 DEPENDPATH += $$PWD/../inst/include
 
+OTHER_FILES += \
+    Doxyfile
+
