@@ -27,7 +27,6 @@ public:
     TraceThread();
 
     void render();
-    void renderOpt();
     GFA::Scalar rand();
 
     void        initRandom(const uint32_t &s);
@@ -38,18 +37,13 @@ public:
     uint32_t        seedVal;
 
     // shared between threads, objects need to be const
-    std::shared_ptr<const ViewPlane>    viewPlaneSPtr;
-    std::shared_ptr<const Scene>        sceneSPtr;
-    std::shared_ptr<const Sampler>      samplerSPtr;        // Opt
-    std::shared_ptr<const Tracer>       tracerSPtr;         // Opt
-    std::shared_ptr<const Light>        ambientLightSPtr;   // Opt
+    const ViewPlane                     *viewPlanePtr;
+    const Scene                         *scenePtr;
 
     // viewplane data
+    // might later be a Sample object
     GFA::Size       width;
     GFA::Size       height;
-    GFA::Scalar     halfWidth;  // Opt
-    GFA::Scalar     halfHeight; // Opt
-    GFA::Scalar     pixelSize;  // Opt
 
     // sample data
     GFA::Index      sampleIndex;
@@ -58,26 +52,26 @@ public:
     GFA::Point2D    samplePoint;
 
     // ray data
-    GFA::Point3D    rayOrigin;
-    GFA::Vector3D   rayDirection;
-
-    // ray hit data
-    bool                                    hitAnObject;
-    std::shared_ptr<const GeometricObject>  hitObjectSPtr;
-    GFA::Scalar                             hitDistance;
-    GFA::Normal                             hitNormal;
+    // might later be a Ray object
+    GFA::Point3D            rayOrigin;
+    GFA::Vector3D           rayDirection;
+    bool                    hitAnObject;
+    const GeometricObject   *hitObjectPtr;  // gets changed per hit point
+    GFA::Scalar             hitDistance;
+    GFA::Normal             hitNormal;
 
     // ShadeRec (surface) data
-    GFA::Point3D                            srHitPoint;
-    GFA::Normal                             srNormal;
-    GFA::RGBColor                           srColor;
-    GFA::RGBColor                           srRhoColor; // diffuse calculated color
-    GFA::RGBColor                           srFColor;
-    GFA::RGBColor                           srLightL;
-    GFA::RGBColor                           srAmbientL;
-    std::shared_ptr<const Material>         srMaterialSPtr;     // gets changed per hit point
-    std::shared_ptr<const GeometricObject>  srObjectSPtr; // gets changed per hit point
-    std::shared_ptr<const Light>            srLightSPtr; // gets changed per hit point
+    // might later be a ShadeRec object
+    GFA::Point3D            srHitPoint;
+    GFA::Normal             srNormal;
+    GFA::RGBColor           srColor;
+    GFA::RGBColor           srRhoColor;     // diffuse calculated color
+    GFA::RGBColor           srFColor;
+    GFA::RGBColor           srLightL;
+    GFA::RGBColor           srAmbientL;
+    const Material          *srMaterialPtr; // gets changed per hit point
+    const GeometricObject   *srObjectPtr;   // gets changed per hit point
+    const Light             *srLightPtr;    // gets changed per hit point
 
     // light data
     GFA::Vector3D   lDirection;

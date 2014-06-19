@@ -28,14 +28,13 @@ public:
     void addLight(std::shared_ptr<Light> lightSPtr);
 
     // Retrieving methods
-    std::shared_ptr<Camera> getCameraSPtr() const;
-    std::shared_ptr<const Tracer> getConstTracerSPtr() const;
-    std::shared_ptr<const Light> getConstAmbientLightSPtr() const;
+    const Camera * getConstCameraPtr() const;
+    const Tracer * getConstTracerPtr() const;
+    const Light * getConstAmbientLightPtr() const;
     std::vector<std::shared_ptr<Light>> getLightsSPtrs() const;
 
     // ray trace methods
     void objectsHit(TraceThread &ttRef, bool closest) const;
-    void lightsShadeOpt(TraceThread &ttRef) const;
     void lightsShade(TraceThread &ttRef) const;
 
 private:

@@ -25,7 +25,7 @@ const GFA::Point3D & FaaRay::GeometricObject::getCenter() const
     return center_;
 }
 //==============================================================================
-FaaRay::ConstMaterialSPtr FaaRay::GeometricObject::getConstMaterialSPtr() const
+const FaaRay::Material * FaaRay::GeometricObject::getConstMaterialPtr() const
 {
-    return materialSPtr_;
+    return materialSPtr_.get();
 }

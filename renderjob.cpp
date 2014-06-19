@@ -42,30 +42,11 @@ void FaaRay::RenderJob::renderOneThread_() const
     tt.initRandom(0);
 
     // Go through all pixels that neeed to be traced
-    std::size_t max = tt.viewPlaneSPtr->width() * tt.viewPlaneSPtr->height();
+    std::size_t max = tt.viewPlanePtr->width() * tt.viewPlanePtr->height();
     for ( std::size_t i = 0; i < max; i++ ) {
-        tt.x = i % tt.viewPlaneSPtr->width();
-        tt.y = i / tt.viewPlaneSPtr->width();
+        tt.x = i % tt.viewPlanePtr->width();
+        tt.y = i / tt.viewPlanePtr->width();
         tt.render();
-    }
-}
-//=============================================================================
-void FaaRay::RenderJob::renderOneThreadOpt_() const
-{
-    // setup render pixel trace that will be refferenced through the whole
-    // thread
-    TraceThread tt;
-    setupTraceThreadOpt_(tt);
-
-    // Init random seed
-    tt.initRandom(0);
-
-    // Go through all pixels that neeed to be traced
-    std::size_t max = tt.width * tt.height;
-    for ( std::size_t i = 0; i < max; i++ ) {
-        tt.x = i % tt.width;
-        tt.y = i / tt.width;
-        tt.renderOpt();
     }
 }
 //=============================================================================
@@ -78,24 +59,8 @@ void FaaRay::RenderJob::setMultiThread()
     multiThread_ = true;
 }
 //=============================================================================
-void FaaRay::RenderJob::setupTraceThreadOpt_(TraceThread &ttRef) const
-{
-    ttRef.viewPlaneSPtr = viewPlaneSPtr_;
-    ttRef.sceneSPtr = sceneSPtr_;
-    ttRef.samplerSPtr = ttRef.viewPlaneSPtr->getConstSamplerSPtr();
-    ttRef.tracerSPtr = ttRef.sceneSPtr->getConstTracerSPtr();
-    ttRef.ambientLightSPtr = ttRef.sceneSPtr->getConstAmbientLightSPtr();
-
-    // Optimization variables
-    ttRef.width = ttRef.viewPlaneSPtr->width();
-    ttRef.height = ttRef.viewPlaneSPtr->height();
-    ttRef.halfWidth = ttRef.width * 0.5;
-    ttRef.halfHeight = ttRef.height * 0.5;
-    ttRef.pixelSize = ttRef.viewPlaneSPtr->pixelSize();
-}
-//=============================================================================
 void FaaRay::RenderJob::setupTraceThread_(TraceThread &ttRef) const
 {
-    ttRef.viewPlaneSPtr = viewPlaneSPtr_;
-    ttRef.sceneSPtr = sceneSPtr_;
+    ttRef.viewPlanePtr = viewPlaneSPtr_.get();
+    ttRef.scenePtr = sceneSPtr_.get();
 }

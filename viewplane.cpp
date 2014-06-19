@@ -38,9 +38,9 @@ const GFA::Size & FaaRay::ViewPlane::numSamples() const
     return samplerSPtr_->numSamples();
 }
 //==============================================================================
-FaaRay::ConstSamplerSPtr FaaRay::ViewPlane::getConstSamplerSPtr() const
+const FaaRay::Sampler * FaaRay::ViewPlane::getConstSamplerPtr() const
 {
-    return samplerSPtr_;
+    return samplerSPtr_.get();
 }
 //==============================================================================
 void FaaRay::ViewPlane::setNumSamples(const GFA::Size &numSamples)

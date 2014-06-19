@@ -20,53 +20,33 @@ void FaaRay::PinholeCamera::setZoom(const GFA::Scalar &zoom)
     zoom_ = zoom;
 }
 //==============================================================================
-void FaaRay::PinholeCamera::renderOpt(TraceThread &ttRef) const
-{
-    // best optimization for more samples
-    ttRef.color.r = 0.0; ttRef.color.g = 0.0; ttRef.color.b = 0.0;
-    ttRef.color.a = 0.0;
-    ttRef.rayOrigin = eye_;
-    GFA::Size numSamples = 0;
-    numSamples = ttRef.samplerSPtr->numSamples();
-
-    GFA::Scalar xStart = ttRef.x - ttRef.halfWidth;
-    GFA::Scalar yStart = ttRef.y - ttRef.halfHeight;
-    for (GFA::Index j = 0; j < numSamples; j++) {
-        ttRef.sampleIndex = j;
-        ttRef.samplerSPtr->setSampleUnitSquare(ttRef);
-        ttRef.samplePoint.x = (xStart + ttRef.sampleUnitSquare.x) * ttRef.pixelSize;
-        ttRef.samplePoint.y = (yStart + ttRef.sampleUnitSquare.y) * ttRef.pixelSize;
-        setRayDirection(ttRef);
-        ttRef.tracerSPtr->traceRayOpt(ttRef);
-        ttRef.color += ttRef.srColor;
-    }
-    ttRef.color /= numSamples;
-}
-//==============================================================================
 void FaaRay::PinholeCamera::render(TraceThread &ttRef) const
 {
-    std::shared_ptr<const Sampler> samplerSPtr =
-        ttRef.viewPlaneSPtr->getConstSamplerSPtr();
+    // Get tracer and sampler info
+    const Sampler   *samplerPtr = ttRef.viewPlanePtr->getConstSamplerPtr();
+    const Tracer    *tracerPtr = ttRef.scenePtr->getConstTracerPtr();
+    GFA::Size numSamples = samplerPtr->numSamples();
 
     // Initialize color
     ttRef.color.r = 0.0; ttRef.color.g = 0.0; ttRef.color.b = 0.0;
     ttRef.color.a = 0.0;
     ttRef.rayOrigin = eye_;
 
-    GFA::Scalar xStart = ttRef.x - ttRef.viewPlaneSPtr->width() * 0.5;
-    GFA::Scalar yStart = ttRef.y - ttRef.viewPlaneSPtr->height() * 0.5;
-    for (GFA::Index j = 0; j < samplerSPtr->numSamples(); j++) {
+    // distribute rays for each sample based on the sampler
+    GFA::Scalar xStart = ttRef.x - ttRef.viewPlanePtr->width() * 0.5;
+    GFA::Scalar yStart = ttRef.y - ttRef.viewPlanePtr->height() * 0.5;
+    for (GFA::Index j = 0; j < numSamples; j++) {
         ttRef.sampleIndex = j;
-        samplerSPtr->setSampleUnitSquare(ttRef);
+        samplerPtr->setSampleUnitSquare(ttRef);
         ttRef.samplePoint.x = (xStart + ttRef.sampleUnitSquare.x)
-                * ttRef.viewPlaneSPtr->pixelSize();
+                * ttRef.viewPlanePtr->pixelSize();
         ttRef.samplePoint.y = (yStart + ttRef.sampleUnitSquare.y)
-                * ttRef.viewPlaneSPtr->pixelSize();
+                * ttRef.viewPlanePtr->pixelSize();
         setRayDirection(ttRef);
-        ttRef.sceneSPtr->getConstTracerSPtr()->traceRay(ttRef);
+        tracerPtr->traceRay(ttRef);
         ttRef.color += ttRef.srColor;
     }
-    ttRef.color /= samplerSPtr->numSamples();
+    ttRef.color /= numSamples;
 }
 //==============================================================================
 void FaaRay::PinholeCamera::setRayDirection(TraceThread &ttRef) const

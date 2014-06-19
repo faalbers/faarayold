@@ -23,7 +23,7 @@ public:
     const GFA::Scalar & pixelSize() const;
     const GFA::Size   & numSamples() const;
 
-    std::shared_ptr<const Sampler> getConstSamplerSPtr() const;
+    const Sampler * getConstSamplerPtr() const;
 
     void setNumSamples(const GFA::Size &numSamples);
 

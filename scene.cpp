@@ -36,19 +36,19 @@ void FaaRay::Scene::addLight(LightSPtr lightSPtr)
     lightSPtrs_.push_back(lightSPtr);
 }
 //==============================================================================
-FaaRay::CameraSPtr FaaRay::Scene::getCameraSPtr() const
+const FaaRay::Camera * FaaRay::Scene::getConstCameraPtr() const
 {
-    return cameraSPtr_;
+    return cameraSPtr_.get();
 }
 //==============================================================================
-FaaRay::ConstTracerSPtr FaaRay::Scene::getConstTracerSPtr() const
+const FaaRay::Tracer * FaaRay::Scene::getConstTracerPtr() const
 {
-    return tracerSPtr_;
+    return tracerSPtr_.get();
 }
 //==============================================================================
-FaaRay::ConstLightSPtr FaaRay::Scene::getConstAmbientLightSPtr() const
+const FaaRay::Light * FaaRay::Scene::getConstAmbientLightPtr() const
 {
-    return ambientLightSPtr_;
+    return ambientLightSPtr_.get();
 }
 //==============================================================================
 std::vector<std::shared_ptr<FaaRay::Light>> FaaRay::Scene::getLightsSPtrs() const
@@ -74,17 +74,8 @@ void FaaRay::Scene::objectsHit(TraceThread &ttRef, bool closest) const
     }
 
     if (ttRef.hitAnObject) {
-        ttRef.hitObjectSPtr = objectSPtrs_[closestHit];
+        ttRef.hitObjectPtr = objectSPtrs_[closestHit].get();
         ttRef.hitDistance = tmin;
-    }
-}
-//==============================================================================
-void FaaRay::Scene::lightsShadeOpt(TraceThread &ttRef) const
-{
-    std::vector<std::shared_ptr<Light>>::const_iterator it;
-    for (it = lightSPtrs_.begin() ; it < lightSPtrs_.end(); it++) {
-        ttRef.srLightSPtr = *it;
-        ttRef.srMaterialSPtr->shadeLight(ttRef);
     }
 }
 //==============================================================================
@@ -92,7 +83,7 @@ void FaaRay::Scene::lightsShade(TraceThread &ttRef) const
 {
     std::vector<std::shared_ptr<Light>>::const_iterator it;
     for (it = lightSPtrs_.begin() ; it < lightSPtrs_.end(); it++) {
-        ttRef.srLightSPtr = *it;
-        ttRef.hitObjectSPtr->getConstMaterialSPtr()->shadeLight(ttRef);
+        ttRef.srLightPtr = (*it).get();
+        ttRef.hitObjectPtr->getConstMaterialPtr()->shadeLight(ttRef);
     }
 }

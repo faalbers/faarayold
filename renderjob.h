@@ -27,10 +27,8 @@ private:
     bool                        multiThread_;
 
     void renderOneThread_() const;
-    void renderOneThreadOpt_() const;
     void renderMultiThread_() const;
     void setupTraceThread_(TraceThread &rt) const;
-    void setupTraceThreadOpt_(TraceThread &rt) const;
 };
 }
 

@@ -8,36 +8,28 @@
 #include "geometricobject.h"
 #include "light.h"
 //==============================================================================
-FaaRay::TraceThread::TraceThread()
+FaaRay::TraceThread::TraceThread() :
+    viewPlanePtr(0),
+    scenePtr(0),
+    hitObjectPtr(0),
+    srMaterialPtr(0), // gets changed per hit point
+    srObjectPtr(0),   // gets changed per hit point
+    srLightPtr(0)     // gets changed per hit point
 {
 }
 //==============================================================================
 void FaaRay::TraceThread::render()
 {
-    CameraSPtr cameraSPtr = sceneSPtr->getCameraSPtr();
+    const Camera *cameraPtr = scenePtr->getConstCameraPtr();
 
     //NOTE: Handle this better
-    if (cameraSPtr == 0) {
+    if (cameraPtr == 0) {
         std::cout << "Scene has no camera" << std::endl;
         return;
     }
 
-    cameraSPtr->render(*this);
-    viewPlaneSPtr->setPixel(x, y, color);
-}
-//==============================================================================
-void FaaRay::TraceThread::renderOpt()
-{
-    CameraSPtr cameraSPtr = sceneSPtr->getCameraSPtr();
-
-    //NOTE: Handle this better
-    if (cameraSPtr == 0) {
-        std::cout << "Scene has no camera" << std::endl;
-        return;
-    }
-
-    cameraSPtr->renderOpt(*this);
-    viewPlaneSPtr->setPixel(x, y, color);
+    cameraPtr->render(*this);
+    viewPlanePtr->setPixel(x, y, color);
 }
 //==============================================================================
 void FaaRay::TraceThread::initRandom(const uint32_t &s)
