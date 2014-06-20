@@ -11,6 +11,9 @@ namespace FaaRay {
 
 class TraceThread;
 
+/*!
+ * \brief The Light base class
+ */
 class FAARAYSHARED_EXPORT Light
 {
 public:

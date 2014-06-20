@@ -10,6 +10,12 @@ namespace FaaRay {
 
 class TraceThread;
 
+/*!
+ * \brief The PinholeCamera class
+ *
+ * Class for a Pinhole type Camera object. The rays will penetrate from the
+ * viewplane's pixel positions into the camera's eye position.
+ */
 class FAARAYSHARED_EXPORT PinholeCamera : public Camera
 {
 public:
@@ -25,7 +31,16 @@ private:
     GFA::Scalar viewPlaneDistance_;
     GFA::Scalar zoom_;
 };
-typedef std::shared_ptr<PinholeCamera> PinholeCameraSPtr;
+/*!
+ * PinholeCamera Shared Pointer
+ */
+typedef std::shared_ptr<PinholeCamera>  PinholeCameraSPtr;
+
+/*!
+ * PinholeCamera Pointer
+ */
+typedef PinholeCamera                   *PinholeCameraPtr;
+
 PinholeCameraSPtr FAARAYSHARED_EXPORT MakePinholeCameraSPtr();
 }
 #endif // FAARAY_PINHOLECAMERA_H

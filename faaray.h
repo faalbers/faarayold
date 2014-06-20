@@ -4,6 +4,11 @@
 #include "faaray_global.h"
 #include <random>
 //==============================================================================
+/*!
+ * /namespace FaaRay
+ *
+ * Namespace for FaaRay library
+ */
 namespace FaaRay {
 
 // Random setup

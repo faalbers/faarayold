@@ -11,6 +11,9 @@ namespace FaaRay {
 
 class TraceThread;
 
+/*!
+ * \brief The Sampler base class
+ */
 class Sampler
 {
 public:

@@ -1,17 +1,31 @@
 #include "camera.h"
 #include <iostream>
 //==============================================================================
+/*!
+ * Constructor that sets up vector with Y Up and compute UVW.
+ */
 FaaRay::Camera::Camera()
 {
     up_.y = 1.0; // set up vector
+    computeUVW_();
 }
 //==============================================================================
+/*!
+ * Set position of camera's eye and re-compute UVW.
+ *
+ * \param eye New eye position for camera
+ */
 void FaaRay::Camera::setEye(const GFA::Point3D &eye)
 {
     eye_ = eye;
     computeUVW_();
 }
 //==============================================================================
+/*!
+ * Set position for camera to look at and re-compute UVW.
+ *
+ * \param lookAt New position for camera to look at
+ */
 void FaaRay::Camera::setLookAt(const GFA::Point3D &lookAt)
 {
     lookAt_ = lookAt;

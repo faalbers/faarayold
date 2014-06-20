@@ -7,6 +7,9 @@ namespace FaaRay {
 
 class TraceThread;
 
+/*!
+ * \brief The Material base class
+ */
 class Material
 {
 public:

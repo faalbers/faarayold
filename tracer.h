@@ -9,6 +9,9 @@ namespace FaaRay
 
 class TraceThread;
 
+/*!
+ * \brief The Tracer base class
+ */
 class FAARAYSHARED_EXPORT Tracer
 {
 public:

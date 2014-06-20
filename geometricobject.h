@@ -11,6 +11,9 @@ namespace FaaRay {
 class TraceThread;
 class Material;
 
+/*!
+ * \brief The GeometricObject base class
+ */
 class GeometricObject
 {
 public:

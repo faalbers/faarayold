@@ -21,6 +21,14 @@ class Material;
 class GeometricObject;
 class Light;
 
+/*!
+ * \brief The TraceThread class
+ *
+ * This class creates an object that will keep all the current ray tracing
+ * information for one cpu thread. This way we can use multy threading if
+ * wanted. Please look at the RenderJob class to see how these Threads are
+ * created and distributed.
+ */
 class TraceThread
 {
 public:

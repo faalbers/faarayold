@@ -5,6 +5,9 @@ namespace FaaRay {
 
 class TraceThread;
 
+/*!
+ * \brief The BRDF base class
+ */
 class BRDF
 {
 public:

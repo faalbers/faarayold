@@ -10,6 +10,11 @@ namespace FaaRay {
 
 class TraceThread;
 
+/*!
+ * \brief The Camera base class
+ *
+ * Base class for Camera object
+ */
 class FAARAYSHARED_EXPORT Camera
 {
 public:
@@ -21,10 +26,12 @@ public:
     virtual void    render(TraceThread &rp) const = 0;
 
 protected:
-    GFA::Point3D  eye_;
-    GFA::Point3D  lookAt_;
-    GFA::Vector3D up_;
-    GFA::Vector3D u_, v_, w_;
+    GFA::Point3D  eye_;     //!< Position of camera eye
+    GFA::Point3D  lookAt_;  //!< Position camera is looking at
+    GFA::Vector3D up_;      //!< Up Vector of the camera
+    GFA::Vector3D u_;       //!< U Vector of camera
+    GFA::Vector3D v_;       //!< V Vector of camera
+    GFA::Vector3D w_;       //!< W Vector of camera
 
     void computeUVW_();
 };
