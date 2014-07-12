@@ -6,7 +6,7 @@
 #include "scene.h"
 //==============================================================================
 /*!
- * Constructor that sets up vector with Y Up and compute UVW.
+ * Constructor that sets the up vector with Y Up and compute UVW.
  */
 FaaRay::PinholeCamera::PinholeCamera() :
     Camera()
