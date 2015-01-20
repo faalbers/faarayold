@@ -11,6 +11,14 @@ namespace FaaRay {
 
 class Sampler;
 
+/*!
+ * \brief The ViewPlane class
+ *
+ * This creates a 2 dimentional view plane. This plane exists in the 3
+ * dimensional scene space and will be used as the flat projection plane for the
+ * ray trace render.
+ *
+ */
 class FAARAYSHARED_EXPORT ViewPlane
 {
 public:

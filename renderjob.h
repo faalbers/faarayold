@@ -10,6 +10,13 @@ class TraceThread;
 class ViewPlane;
 class Scene;
 
+/*!
+ * \brief The RenderJob class
+ *
+ * The render job is created at render start. It gathers all settings and
+ * distributes ray taces.
+ *
+ */
 class FAARAYSHARED_EXPORT RenderJob
 {
 public:

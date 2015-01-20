@@ -4,6 +4,9 @@
 #include "scene.h"
 #include <iostream>
 //==============================================================================
+/*!
+ * Constructor that prepares the render job based on setting.
+ */
 FaaRay::RenderJob::RenderJob() :
     viewPlaneSPtr_(new ViewPlane),
     sceneSPtr_(new Scene),
@@ -11,6 +14,11 @@ FaaRay::RenderJob::RenderJob() :
 {
 }
 //==============================================================================
+/*!
+ * Get shared pointer of the currently used scene.
+ *
+ * \return  FaaRay::SceneSPtr
+ */
 FaaRay::SceneSPtr FaaRay::RenderJob::getSceneSPtr() const
 {
     return sceneSPtr_;
