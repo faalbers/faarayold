@@ -1,0 +1,70 @@
+import os
+
+DEBUG = False
+
+# BASE ENVIRONMENT
+# Environment that is platform agnostic
+baseEnv = Environment()
+
+if baseEnv['PLATFORM'] == 'posix':
+    baseEnv.Append(CCFLAGS = [
+        '-DHAVE_LINUX'
+        #,'-std=c++0x'
+        ,'-std=c++11'
+        ,'-pedantic-errors'
+        ,'-Wall'
+        ,'-Wextra'
+        ,'-Wuninitialized'
+        ])
+    if DEBUG:
+        baseEnv.Append(CCFLAGS = ['-fno-inline', '-O0', '-g3'])
+    else:
+        baseEnv.Append(CCFLAGS = ['-O'])
+    if os.environ['USER'] == 'afrank':
+        #pixarToolsBase = '/pixar/d2/sets/tools-base-03';
+        pixarToolsBase = '/dist/d2sets/fedora-11-x86_64/tools-base-03-python';
+        baseEnv.Append(CPPPATH = ['%s/include' % pixarToolsBase])
+        baseEnv.Append(LIBPATH = ['%s/lib' % pixarToolsBase])
+        baseEnv.Replace(CXX = '/dist/d2sets/fedora-11-x86_64/tools-base-03-python/bin/g++')
+    elif os.environ['USER'] == 'frank':
+        tbbToolsBase = '/home/frank/tbb41_20130116oss'
+        baseEnv.Append(CPPPATH = ['%s/include' % tbbToolsBase])
+        baseEnv.Append(LIBPATH = ['%s/lib/intel64/cc4.1.0_libc2.4_kernel2.6.16.21' % tbbToolsBase])
+    baseEnv.Append(LIBS= ['tbb'])
+
+
+if baseEnv['PLATFORM'] == 'win32':
+    baseEnv.Append(ENV = {'PATH' : os.environ['PATH']})
+    baseEnv.Append(ENV = {'LIB' : os.environ.get('LIB')})
+    baseEnv.Append(ENV = {'INCLUDE' : os.environ.get('INCLUDE')})
+    baseEnv.Append(CCFLAGS = [
+        '-DHAVE_WINDOWS'
+        ,'/W4'
+        ,'/Wall'
+        ,'/WX'
+        ,'/Za'
+        ,'/EHsc'
+        ])
+
+if baseEnv['PLATFORM'] == 'darwin':
+    baseEnv.Append(CCFLAGS = [
+        '-DHAVE_OSX'])
+
+# DIST SCTRUCTURE
+if DEBUG:
+    baseEnv['BUILDKIND'] = 'debug'
+else:
+    baseEnv['BUILDKIND'] = 'opt'
+distPath = '#/inst/%s/%s' % (baseEnv['PLATFORM'], baseEnv['BUILDKIND'])
+baseEnv['DISTPATH'] = distPath
+
+# Add GFA
+baseEnv.Append(CPPPATH = ['/home/%s/trees/work/gfa/inst/posix/%s/include' % (os.environ['USER'],baseEnv['BUILDKIND']) ])
+baseEnv.Append(LIBPATH = ['/home/%s/trees/work/gfa/inst/posix/%s/lib' % (os.environ['USER'],baseEnv['BUILDKIND']) ])
+baseEnv.Append(LIBS=     ['gfa'])
+
+
+Export('baseEnv')
+
+SConscript('SConscript')
+

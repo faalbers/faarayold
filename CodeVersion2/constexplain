@@ -1,0 +1,23 @@
+const int Constant1=96;
+will create an integer constant, unimaginatively called \u2018Constant1\u2019, with the value 96.
+
+const int * Constant2;
+int const * Constant2;
+declares that Constant2 is a variable pointer to a constant integer
+
+int * const Constant3;
+declares that Constant3 is constant pointer to a variable integer
+
+int const * const Constant4;
+declares that Constant4 is constant pointer to a constant integer.
+
+const char *Function1() { return "Some text";}
+The values in the returned chars array pointer are not supposed to be changed.
+
+void Subroutine4(big_structure_type const &Parameter1);
+Pass reference of structure and make sure it doesn't get altered.
+
+class Class2
+{ void Method1() const;
+will ban Method1 in Class2 from being anything which can attempt to alter any member variables in the object.
+

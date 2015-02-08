@@ -1,0 +1,16 @@
+Import('libEnv')
+
+lib_names = Split("""
+    Tracer
+    RayCastTracer
+""")
+
+lib_objs = [name+'.cpp' for name in lib_names]
+objects = libEnv.SharedObject(lib_objs+Glob('*.qrc'))
+
+lib_heads = [name+'.h' for name in lib_names]
+lib_heads_install = [libEnv['DISTPATH']+'/include/FaaRay/'+name for name in lib_heads]
+libEnv.InstallAs(lib_heads_install, lib_heads)
+
+Return('objects')
+

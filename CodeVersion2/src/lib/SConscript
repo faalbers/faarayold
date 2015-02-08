@@ -1,0 +1,31 @@
+Import('qtEnv')
+env = qtEnv.Clone()
+
+if 'qt4' in qtEnv['TOOLS']:
+    env.EnableQt4Modules(['QtGui'])
+if 'qt5' in qtEnv['TOOLS']:
+    env.EnableQt5Modules(['QtWidgets'])
+
+env.Append(CPPPATH = ['#src/lib','#gen/lib'])
+
+lib_subdirs = Split("""
+    BRDFs
+    Cameras
+    GeometricObjects
+    GUI
+    Lights
+    Materials
+    Samplers
+    Scene
+    Tracers
+    Utilities
+""")
+
+objs = []
+for subdir in lib_subdirs:
+    sub_objs = SConscript('%s/SConscript' % subdir)
+    objs += sub_objs
+
+env.Library('faaray', objs)
+
+

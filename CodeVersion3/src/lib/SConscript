@@ -1,0 +1,33 @@
+Import('baseEnv')
+
+libEnv = baseEnv.Clone()
+
+libEnv.Append(CPPPATH = [libEnv['DISTPATH']+'/include'])
+
+if libEnv['PLATFORM'] == 'posix':
+    libEnv.Append(CCFLAGS = ['-fvisibility=hidden'])
+
+Export('libEnv')
+
+lib_subdirs = Split("""
+    BRDFs
+    Cameras
+    GeometricObjects
+    Lights
+    Materials
+    Render
+    Samplers
+    Scene
+    Tracers
+    Utils
+""")
+
+lib_objs = []
+for subdir in lib_subdirs:
+    lib_objs += SConscript('%s/SConscript' % subdir)
+
+lib = libEnv.SharedLibrary('faaray', lib_objs)
+libEnv.Install(libEnv['DISTPATH']+'/lib', lib)
+libEnv.Install(libEnv['DISTPATH']+'/bin', lib[0])
+
+

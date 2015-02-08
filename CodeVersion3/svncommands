@@ -1,0 +1,17 @@
+Create repository:
+svnadmin create /home/afrank/Dropbox/svn-repos
+
+List projects in repository:
+svn list file:///home/afrank/Dropbox/svn-repos
+
+Remove projects from repository:
+svn delete file:///home/afrank/Dropbox/svn-repos/PROJNAME -m "gone"
+
+Checking out project from repository:
+svn co file:///home/afrank/Dropbox/svn-repos/PROJNAME/trunk PROJNAME
+svn co file:///C:/Dropbox/svn-repos/faamath/trunk faamath
+
+Create project in repository:
+svn import PATH file:///home/afrank/Dropbox/svn-repos/PROJNAME/trunk -m "first version"
+svn import PATH file:///C:/Dropbox/svn-repos/PROJNAME/trunk -m "first version"
+

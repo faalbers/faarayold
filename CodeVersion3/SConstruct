@@ -1,0 +1,83 @@
+import os
+
+# BASE ENVIRONMENT
+# Environment that is platform agnostic
+baseEnv = Environment()
+
+platform    = baseEnv['PLATFORM']
+debug       = False
+
+# platform and user specific
+if platform == 'posix':
+    user = os.environ['USER']
+    baseEnv.Append(CCFLAGS = [
+        '-D_POSIX'
+        #,'-std=c++0x'
+        ,'-std=c++11'
+        ,'-pedantic-errors'
+        ,'-Wall'
+        ,'-Wextra'
+        ,'-Wuninitialized'
+        ])
+    gfaPath = '/home/%s/trees/work/gfa/inst/posix/opt' % user
+    gfaLib = 'libgfa.so'
+    if user == 'afrank':
+        baseEnv.Replace(CXX = '/dist/d2sets/fedora-11-x86_64/tools-base-03-python/bin/g++')
+        pixarToolsBase = '/dist/d2sets/fedora-11-x86_64/tools-base-03-python';
+        baseEnv.Append(CPPPATH = ['%s/include' % pixarToolsBase])
+        baseEnv.Append(LIBPATH = ['%s/lib' % pixarToolsBase])
+    elif user == 'frank':
+        tbbToolsBase = '/home/frank/tbb41_20130116oss'
+        baseEnv.Append(CPPPATH = ['%s/include' % tbbToolsBase])
+        baseEnv.Append(LIBPATH = ['%s/lib/intel64/cc4.1.0_libc2.4_kernel2.6.16.21' % tbbToolsBase])
+elif platform == 'win32':
+    user = os.environ['USERNAME']
+    baseEnv.Append(ENV = {'PATH' : os.environ['PATH']})
+    baseEnv.Append(ENV = {'LIB' : os.environ.get('LIB')})
+    baseEnv.Append(ENV = {'INCLUDE' : os.environ.get('INCLUDE')})
+    baseEnv.Append(CCFLAGS = [
+        '-D_WIN32'
+        ,'-DFAARAY_BUILDING_DLL'
+        #,'/W4'
+        #,'/Wall'
+        #,'/WX'
+        #,'/Za'
+        ,'/EHsc'
+        ])
+    gfaPath = 'C:/Work/gfa/inst/win32/opt'
+    gfaLib = 'gfa.dll'
+    if user == 'Amy Chen':
+        tbbToolsBase = 'C:/Work/tbb42_20131118oss'
+        baseEnv.Append(LIBPATH = ['%s/lib/ia32/vc11' % tbbToolsBase])
+    else:
+        tbbToolsBase = 'C:/Work/tbb42_20131003oss'
+        baseEnv.Append(LIBPATH = ['%s/lib/intel64/vc11' % tbbToolsBase])
+    baseEnv.Append(CPPPATH = ['%s/include' % tbbToolsBase])
+elif platform == 'darwin':
+    user = os.environ['USER']
+    baseEnv.Append(CCFLAGS = [
+        '-DHAVE_OSX'])
+
+# DIST SCTRUCTURE and flags
+if debug:
+    baseEnv['BUILDKIND'] = 'debug'
+    baseEnv.Append(CCFLAGS = ['-fno-inline', '-O0', '-g3'])
+else:
+    baseEnv['BUILDKIND'] = 'opt'
+    if platform != 'win32':
+        baseEnv.Append(CCFLAGS = ['-O'])
+distPath = '#/inst/%s/%s' % (baseEnv['PLATFORM'], baseEnv['BUILDKIND'])
+baseEnv['DISTPATH'] = distPath
+
+# Add libraries
+baseEnv.Append(CPPPATH = ['%s/include' % gfaPath])
+baseEnv.Append(LIBPATH = ['%s/lib' % gfaPath])
+baseEnv.Append(LIBS=     ['gfa', 'tbb'])
+
+# copy lib for exec
+baseEnv.Install(baseEnv['DISTPATH']+'/bin', '%s/lib/%s' % (gfaPath,gfaLib))
+
+Export('baseEnv')
+
+SConscript('SConscript')
+

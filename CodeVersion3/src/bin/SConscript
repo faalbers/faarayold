@@ -1,0 +1,13 @@
+Import('baseEnv')
+
+binEnv = baseEnv.Clone()
+
+binEnv.Append(LINKFLAGS = ["-Wl,-rpath='$$ORIGIN'"])
+binEnv.Append(LIBPATH = [binEnv['DISTPATH']+'/lib'])
+binEnv.Append(CPPPATH = [binEnv['DISTPATH']+'/include'])
+binEnv.Append(LIBS=     ['faaray'])
+
+prog = binEnv.Program('faaraytest', 'main.cpp')
+
+binEnv.Install(binEnv['DISTPATH']+'/bin', prog)
+

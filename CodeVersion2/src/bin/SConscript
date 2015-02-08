@@ -1,0 +1,3 @@
+SConscript('faaray/SConscript')
+SConscript('tbbtest/SConscript')
+
